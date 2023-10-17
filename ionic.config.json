@@ -1,0 +1,7 @@
+{
+  "name": "GymApp_Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
