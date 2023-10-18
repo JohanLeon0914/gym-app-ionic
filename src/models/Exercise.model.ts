@@ -5,6 +5,7 @@ export interface Exercise {
     gifUrl:string,
     description:string,
     repetitions:Repetitions,
+    category:string,
     sets:number
 }
 

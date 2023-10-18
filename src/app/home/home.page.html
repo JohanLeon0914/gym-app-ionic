@@ -13,6 +13,17 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-searchbar animated="true" placeholder="Search exercise..." show-clear-button="focus" (ionInput)="searchExercise($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Select a category" (ionChange)="onCategoryChange($event)">
+        <ion-select-option *ngFor="let category of getExerciseCategories()" [value]="category">
+          {{ category }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
   <ion-card *ngFor="let exercise of exercises">
     <ion-card-content class="card-content">
       <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
