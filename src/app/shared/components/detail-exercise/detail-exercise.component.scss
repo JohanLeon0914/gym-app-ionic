@@ -1,0 +1,49 @@
+/* Estilos para el contenedor de la imagen */
+.exercise-image-container {
+    text-align: center; /* Centra la imagen horizontalmente */
+    padding: 20px; /* Espaciado alrededor de la imagen */
+  }
+  
+  /* Estilos para la imagen del ejercicio */
+  .exercise-image {
+    max-width: 100%; /* Asegura que la imagen no se desborde del contenedor */
+    max-height: 200px; /* Limita la altura máxima de la imagen */
+  }
+  
+  /* Estilos para el título del ejercicio */
+  ion-card-title {
+    font-size: 24px; /* Tamaño de fuente del título */
+    font-weight: bold; /* Texto en negrita */
+  }
+  
+  /* Estilos para la descripción del ejercicio */
+  .exercise-description {
+    margin-top: 10px; /* Espaciado superior */
+  }
+  
+  /* Estilos para la lista de repeticiones */
+  ion-list {
+    margin-top: 10px; /* Espaciado superior */
+  }
+  
+  /* Estilos para cada elemento de la lista de repeticiones */
+  ion-item {
+    --inner-padding-end: 0; /* Elimina el relleno al final del elemento */
+  }
+  
+  /* Estilos para las etiquetas de repeticiones (Principiante, Intermedio, Avanzado) */
+  ion-label {
+    font-weight: bold; /* Texto en negrita */
+  }
+  
+  /* Estilos para los valores de repeticiones */
+  ion-text {
+    font-weight: normal; /* Texto normal (no en negrita) */
+  }
+
+  .repetitions-txt {
+    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 18px; /* Tamaño de fuente para el título */
+    font-weight: bold; /* Texto en negrita */
+    margin-top: 20px; /* Espaciado superior */
+  }

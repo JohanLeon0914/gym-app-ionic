@@ -1,0 +1,16 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar [color]="color ? color : 'primary' ">
+    
+    <ion-buttons slot="start">
+      <!-- cerrar modal si es uno -->
+      <ion-button (click)="dismissModal()" *ngIf="isModal">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+      <!-- Back button -->
+      <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="title" [ngClass]="{'ion-text-center': centerTitle}">{{ title }}</ion-title>
+
+  </ion-toolbar>
+</ion-header>

@@ -1,0 +1,32 @@
+<ion-content>
+  <app-header
+    color="dark"
+    [centerTitle]="true"
+    [isModal]="true"
+    [title]="exercise.name"    
+  ></app-header>
+  <ion-card>
+    <ion-card-content>
+      <div class="exercise-image-container">
+        <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
+      </div>
+      <ion-card-title>{{ exercise.name }}</ion-card-title>
+      <p class="exercise-description">{{ exercise.description }}</p>
+      <p class="repetitions-txt">Repeticiones</p>
+      <ion-list>
+        <ion-item>
+          <ion-label>Principiante:</ion-label>
+          <ion-text>{{ exercise.repetitions.begginer }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Intermedio:</ion-label>
+          <ion-text>{{ exercise.repetitions.intermediate }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Avanzado:</ion-label>
+          <ion-text>{{ exercise.repetitions.advanced }}</ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Routine
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Routine</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Verificar si el arreglo "routine" está vacío -->
+  <div *ngIf="routine.length === 0" class="empty-routine-message">
+    You don't have any exercises in your routine yet!
+  </div>
+
+  <ion-card *ngFor="let exercise of routine">
+    <ion-card-content class="card-content">
+      <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
+      <div class="exercise-details">
+        <ion-card-title>{{ exercise.name }}</ion-card-title>
+        <p class="exercise-description">{{ exercise.description }}</p>
+        <p>Sets: {{ exercise.sets }}</p>
+        <ion-button shape="round" color="success" (click)="substractExerciseToRoutine(exercise)">
+          Remove
+          <ion-icon slot="end" name="remove-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="centered-button">
+    <ion-button shape="round" color="success" (click)="startRoutine()">
+      Start
+      <ion-icon slot="end" name="play-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+
+</ion-content>

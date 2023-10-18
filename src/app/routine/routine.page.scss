@@ -1,0 +1,41 @@
+ion-card {
+    margin: 10px; /* Espacio entre las tarjetas */
+  }
+  
+  .card-content {
+    display: flex;
+    align-items: center;
+    padding: 10px; /* Espacio entre la imagen y el contenido */
+  }
+  
+  .exercise-image {
+    max-width: 150px; /* Tamaño máximo para la imagen */
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+  }
+  
+  .exercise-details {
+    flex: 1; /* Permite que el contenido del ejercicio se expanda para llenar el espacio disponible */
+  }
+
+  .exercise-description {
+    font-size: 14px; /* Tamaño de fuente para la descripción */
+    margin-top: 5px; /* Espacio entre el título y la descripción */
+  }
+
+  .add-button {
+    color: white; /* Color del texto */
+  }
+
+  .empty-routine-message {
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    color: #777; /* Color de texto gris */
+    font-weight: bold; /* Texto en negrita */
+  }
+
+  .centered-button {
+    text-align: center;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+  }
