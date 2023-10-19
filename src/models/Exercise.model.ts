@@ -6,6 +6,7 @@ export interface Exercise {
     description:string,
     repetitions:Repetitions,
     category:string,
+    run_time:number,
     sets:number
 }
 

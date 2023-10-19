@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UtilService } from '../services/util.service';
 import { Exercise } from 'src/models/Exercise.model';
+import { RoutineModalComponent } from '../shared/components/routine-modal/routine-modal.component';
 
 @Component({
   selector: 'app-routine',
@@ -26,7 +27,10 @@ export class RoutinePage {
   }
 
   startRoutine(){
-    
+    this.utilSvc.presentModal({
+      component: RoutineModalComponent,
+      cssClass: 'add-update-modal',
+    });
   }
 
 }

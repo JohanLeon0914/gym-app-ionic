@@ -5,11 +5,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DetailExerciseComponent } from './components/detail-exercise/detail-exercise.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RoutineModalComponent } from './components/routine-modal/routine-modal.component';
+import { ChronometerComponent } from './components/chronometer/chronometer.component';
 
 @NgModule({
   declarations: [
     DetailExerciseComponent,
-    HeaderComponent
+    HeaderComponent,
+    RoutineModalComponent,
+    ChronometerComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import { HeaderComponent } from './components/header/header.component';
   ],
   exports: [
     DetailExerciseComponent,
-    HeaderComponent
+    HeaderComponent,
+    RoutineModalComponent,
+    ChronometerComponent
   ]
 })
 export class SharedModule { }
