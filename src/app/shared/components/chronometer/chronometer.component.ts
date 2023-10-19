@@ -9,6 +9,7 @@ import { Exercise } from 'src/models/Exercise.model';
 })
 export class ChronometerComponent implements OnInit {
   @Input() routine: Exercise[];
+  @Input() restTimeNumber: number;
   currentExerciseIndex: number = 0;
   timer: any;
   currentTime: number = 0;
@@ -27,7 +28,7 @@ export class ChronometerComponent implements OnInit {
     if (this.currentExerciseIndex < this.routine.length) {
       if (this.restTime) {
         this.calculateNextExercise();
-        this.currentTime = 10;
+        this.currentTime = this.restTimeNumber;
         this.timer = setInterval(() => {
           this.currentTime--;
           if (this.currentTime === 0) {

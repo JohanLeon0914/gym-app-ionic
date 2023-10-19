@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
 import { Exercise } from 'src/models/Exercise.model';
 
@@ -10,6 +10,7 @@ import { Exercise } from 'src/models/Exercise.model';
 export class RoutineModalComponent  implements OnInit {
 
   routine: Exercise[] = [];
+  @Input() restTime: number;
 
   constructor(private utilSvc: UtilService) { }
 

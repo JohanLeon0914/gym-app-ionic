@@ -18,6 +18,14 @@
     You don't have any exercises in your routine yet!
   </div>
 
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Select a rest time" (ionChange)="onRestTimeChange($event)">
+        <ion-select-option *ngFor="let time of restTimes" [value]="time">{{ time }} Sec</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
   <ion-card *ngFor="let exercise of routine">
     <ion-card-content class="card-content">
       <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">

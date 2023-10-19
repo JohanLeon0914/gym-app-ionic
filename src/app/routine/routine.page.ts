@@ -11,6 +11,8 @@ import { RoutineModalComponent } from '../shared/components/routine-modal/routin
 export class RoutinePage {
 
   routine:Exercise[] = []
+  restTimes: number[] = Array.from({ length: 12 }, (_, i) => (i + 1) * 5);
+  restTime: number = 0
 
   constructor(private utilSvc: UtilService) {}
 
@@ -27,10 +29,24 @@ export class RoutinePage {
   }
 
   startRoutine(){
-    this.utilSvc.presentModal({
-      component: RoutineModalComponent,
-      cssClass: 'add-update-modal',
-    });
+    if(this.restTime!=0) {
+      const restTime = this.restTime
+      this.utilSvc.presentModal({
+        component: RoutineModalComponent,
+        componentProps: { restTime },
+        cssClass: 'add-update-modal',
+      });
+    } else {
+      this.utilSvc.presentToast({
+        message: 'Select a rest time',
+        duration: 1500,
+      });
+    } 
+    
+  }
+
+  onRestTimeChange(event) {
+    this.restTime = event.detail.value;
   }
 
 }
