@@ -17,6 +17,7 @@ export class ChronometerComponent implements OnInit {
   restTime: boolean = true;
   rutineEnded: boolean = false;
   currentExercise: Exercise;
+  setsCount: number = 0;
   nextExercise: Exercise | null = null;
 
   constructor(private platform: Platform, private utilSvc: UtilService) {}
@@ -57,8 +58,11 @@ export class ChronometerComponent implements OnInit {
         this.timer = setInterval(() => {
           this.currentTime--;
           if (this.currentTime === 0) {
+            this.setsCount++;
             if(this.currentExercise.sets === 1) {
               this.currentExerciseIndex++;
+              this.currentExercise.sets = this.setsCount;
+              this.setsCount = 0;
             } else {
               this.currentExercise.sets--;
               this.calculateNextExercise();

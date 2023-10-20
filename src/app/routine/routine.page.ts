@@ -30,6 +30,7 @@ export class RoutinePage {
 
   addExerciseToRoutine(exercise: Exercise) {
     this.utilSvc.addExerciseToRoutine(exercise);
+    this.getRoutine()
   }
 
   async startRoutine(){
@@ -41,7 +42,7 @@ export class RoutinePage {
         cssClass: 'add-update-modal',
       });
       if (res && res.success) {
-        this.routine = this.utilSvc.getElementFromLocalStorage("routine")
+        this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Exercise[]
       }
     } else {
       this.utilSvc.presentToast({
