@@ -28,6 +28,10 @@ export class RoutinePage {
     this.utilSvc.removeFromRoutine(exercise.id)
   }
 
+  addExerciseToRoutine(exercise: Exercise) {
+    this.utilSvc.addExerciseToRoutine(exercise);
+  }
+
   startRoutine(){
     if(this.restTime!=0) {
       const restTime = this.restTime

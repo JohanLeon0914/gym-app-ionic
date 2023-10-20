@@ -33,9 +33,13 @@
         <ion-card-title>{{ exercise.name }}</ion-card-title>
         <p class="exercise-description">{{ exercise.description }}</p>
         <p>Sets: {{ exercise.sets }}</p>
-        <ion-button shape="round" color="success" (click)="substractExerciseToRoutine(exercise)">
+        <ion-button shape="round" size="small" color="success" (click)="substractExerciseToRoutine(exercise)">
           Remove
           <ion-icon slot="end" name="remove-outline"></ion-icon>
+        </ion-button>
+        <ion-button size="small" shape="round" color="success" (click)="addExerciseToRoutine(exercise)">
+          Add
+          <ion-icon slot="end" name="add-outline"></ion-icon>
         </ion-button>
       </div>
     </ion-card-content>
