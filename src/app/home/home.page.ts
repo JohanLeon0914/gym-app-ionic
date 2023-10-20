@@ -61,6 +61,7 @@ export class HomePage {
     this.utilSvc.presentToast({
       message: 'Exercise added to your routine',
       color: 'success',
+      position: 'top',
       icon: 'checkmark-circle-outline',
       duration: 800,
     });

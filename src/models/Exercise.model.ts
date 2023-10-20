@@ -2,7 +2,7 @@ export interface Exercise {
     id: string,
     name: string,
     image_url: string,
-    gifUrl:string,
+    gif_url:string,
     description:string,
     repetitions:Repetitions,
     category:string,
