@@ -17,14 +17,13 @@ export class HeaderComponent  implements OnInit {
   
   darkMode: BehaviorSubject<Boolean>;
   constructor(
-    // private themeSvc: ThemeService,
     private utilSvc: UtilService
   ) { }
 
   ngOnInit() {}
 
   dismissModal() {
-    this.utilSvc.dismissModal();
+    this.utilSvc.dismissModal({ success: true });
   }
 
 }

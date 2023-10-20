@@ -13,7 +13,7 @@ import { ChronometerComponent } from './components/chronometer/chronometer.compo
     DetailExerciseComponent,
     HeaderComponent,
     RoutineModalComponent,
-    ChronometerComponent
+    ChronometerComponent,
   ],
   imports: [
     CommonModule,

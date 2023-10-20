@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
 import { Exercise } from 'src/models/Exercise.model';
+import { Platform } from '@ionic/angular';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-chronometer',
@@ -16,11 +17,19 @@ export class ChronometerComponent implements OnInit {
   restTime: boolean = true;
   rutineEnded: boolean = false;
   currentExercise: Exercise;
-  setsCount: number = 0;
   nextExercise: Exercise | null = null;
+
+  constructor(private platform: Platform, private utilSvc: UtilService) {}
 
   ngOnInit() {
     this.startRoutine();
+  }
+
+  playAudio() {
+      const audio = new Audio();
+      audio.src = 'assets/audio/last-5.mp3';
+      audio.load();
+      audio.play();
   }
 
   startRoutine() {
@@ -39,13 +48,15 @@ export class ChronometerComponent implements OnInit {
               this.rutineEnded = true;
             }
           }
+          if(this.currentTime === 4 && this.utilSvc.getIsRoutineModalOpen()){
+            this.playAudio();
+          }
         }, 1000);
       } else {
         this.currentTime = this.currentExercise.run_time;
         this.timer = setInterval(() => {
           this.currentTime--;
           if (this.currentTime === 0) {
-            this.setsCount++;
             if(this.currentExercise.sets === 1) {
               this.currentExerciseIndex++;
             } else {
@@ -56,9 +67,11 @@ export class ChronometerComponent implements OnInit {
               this.restTime = !this.restTime;
               this.startNextExercise();
             } else {
-              this.currentExercise.sets = this.setsCount;
               this.rutineEnded = true;
             }
+          }
+          if(this.currentTime === 4 && this.utilSvc.getIsRoutineModalOpen()){
+            this.playAudio();
           }
         }, 1000);
       }

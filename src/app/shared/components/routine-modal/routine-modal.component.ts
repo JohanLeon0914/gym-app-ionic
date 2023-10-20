@@ -15,6 +15,10 @@ export class RoutineModalComponent  implements OnInit {
   constructor(private utilSvc: UtilService) { }
 
   ngOnInit() {
+    this.getRoutine()
+  }
+
+  getRoutine() {
     this.routine = this.utilSvc.getRoutine();
   }
 

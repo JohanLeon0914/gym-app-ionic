@@ -9,6 +9,7 @@ import { Exercise } from 'src/models/Exercise.model';
 export class UtilService {
 
   private routine: Exercise[] = []
+  private isRutineModalOpen:boolean = false;
 
   constructor(
     private loadingController: LoadingController,
@@ -44,10 +45,9 @@ export class UtilService {
       if (item.sets > 1) {
         item.sets -= 1;
       } else {
-        this.routine.splice(itemIndex, 1); // Eliminamos el producto del array
+        this.routine.splice(itemIndex, 1); 
       }
       
-      // Guardar el array del carrito actualizado en el localStorage
       this.setElementInLocalStorage('routine', this.routine);
     }
   }
@@ -100,6 +100,7 @@ export class UtilService {
 
   //modal
   async presentModal(opts: ModalOptions) {
+    this.isRutineModalOpen = true;
     const modal = await this.modalController.create(opts);
     await modal.present();
     //la data que puede que devuelva el modal al cerrarse
@@ -110,6 +111,12 @@ export class UtilService {
   }
   //si cierras la modal y quieras devolver una data, se pasa atraves de esta funcion
   dismissModal(data?: any){
+    this.isRutineModalOpen = false;
     this.modalController.dismiss(data);
   }
+
+  getIsRoutineModalOpen() {
+    return this.isRutineModalOpen;
+  }
+
 }

@@ -32,14 +32,17 @@ export class RoutinePage {
     this.utilSvc.addExerciseToRoutine(exercise);
   }
 
-  startRoutine(){
+  async startRoutine(){
     if(this.restTime!=0) {
       const restTime = this.restTime
-      this.utilSvc.presentModal({
+      let res = await this.utilSvc.presentModal({
         component: RoutineModalComponent,
         componentProps: { restTime },
         cssClass: 'add-update-modal',
       });
+      if (res && res.success) {
+        this.routine = this.utilSvc.getElementFromLocalStorage("routine")
+      }
     } else {
       this.utilSvc.presentToast({
         message: 'Select a rest time',
