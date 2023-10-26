@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Profile
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="content ion-text-center">
+    <div *ngIf="user" class="avatar-container">
+      <div class="avatar-wrapper">
+        <ion-avatar class="avatar">
+          <img [src]="user?.photoURL">
+        </ion-avatar>
+      </div>
+    </div>
+    <h2>{{ user?.displayName }}</h2>
+    <div>{{ user?.email }}</div>
+
+    <ion-button *ngIf="!user" (click)="loginWithGoogle()" shape="round">
+      Sign up with Google
+      <ion-icon slot="end" name="logo-google"></ion-icon>
+    </ion-button>
+
+    <!-- <ion-button *ngIf="user" (click)="openModalSeeShoppingHistory()" shape="round">
+      Routines
+      <ion-icon slot="end" name="archive-outline"></ion-icon>
+    </ion-button> -->
+
+    <ion-button *ngIf="user" (click)="signOut()" color="danger" shape="round">
+      Log out
+      <ion-icon slot="end" name="log-out-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

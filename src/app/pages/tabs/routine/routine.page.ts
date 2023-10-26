@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UtilService } from '../services/util.service';
 import { Exercise } from 'src/models/Exercise.model';
-import { RoutineModalComponent } from '../shared/components/routine-modal/routine-modal.component';
+import { RoutineModalComponent } from '../../../shared/components/routine-modal/routine-modal.component';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-routine',

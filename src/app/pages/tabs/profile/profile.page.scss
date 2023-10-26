@@ -1,0 +1,20 @@
+.avatar {
+    font-size: 130px;
+    margin-bottom: 30px;
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+ion-button {
+    margin-top: 50px;
+}

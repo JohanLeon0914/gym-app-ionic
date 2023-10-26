@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ApiServiceService } from '../services/api-service.service';
 import { Exercise } from 'src/models/Exercise.model';
-import { UtilService } from '../services/util.service';
-import { DetailExerciseComponent } from '../shared/components/detail-exercise/detail-exercise.component';
 import { ExerciseCategory } from 'src/models/Category.model';
+import { ApiServiceService } from 'src/app/services/api-service.service';
+import { UtilService } from 'src/app/services/util.service';
+import { DetailExerciseComponent } from 'src/app/shared/components/detail-exercise/detail-exercise.component';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +34,7 @@ export class HomePage {
         });
       }
       if (filteredByCategory.length != 0) {
-        // Filtrar por búsqueda ycategoria
+        // Filtrar por búsqueda y categoria
         filteredBySearch = filteredByCategory.filter((exercise: Exercise) => {
           return exercise.name
             .toLowerCase()
