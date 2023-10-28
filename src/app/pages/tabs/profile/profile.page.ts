@@ -3,6 +3,7 @@ import { User } from 'firebase/auth';
 import { FirebaseService } from '../../../services/firebase.service';
 import { UtilService } from '../../../services/util.service';
 import { GetRoutinesComponent } from 'src/app/shared/components/get-routines/get-routines.component';
+import { Routine } from 'src/models/Routine.model';
 
 @Component({
   selector: 'app-profile',
@@ -38,6 +39,7 @@ export class ProfilePage implements OnInit {
       this.utilSvc.presentToast({
         message: `Welcome ` + this.user.displayName,
         duration: 1500,
+        position: "top",
         color: 'primary',
         icon: 'person-outline'
       });
@@ -68,6 +70,8 @@ export class ProfilePage implements OnInit {
           text: 'yes, log out',
           handler: () => {
             this.firebaseSvc.signOut();
+            const routine:Routine = new Routine()
+            this.utilSvc.setElementInLocalStorage("routine", routine)
           },
         },
       ],

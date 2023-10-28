@@ -4,6 +4,7 @@ import { ExerciseCategory } from 'src/models/Category.model';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 import { UtilService } from 'src/app/services/util.service';
 import { DetailExerciseComponent } from 'src/app/shared/components/detail-exercise/detail-exercise.component';
+import { Routine } from 'src/models/Routine.model';
 
 @Component({
   selector: 'app-home',
@@ -57,7 +58,8 @@ export class HomePage {
   }
 
   addExerciseToRoutine(exercise: Exercise) {
-    this.utilSvc.addExerciseToRoutine(exercise);
+    const rutine: Routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+    this.utilSvc.addExerciseToRoutine(exercise, rutine);
     this.utilSvc.presentToast({
       message: 'Exercise added to your routine',
       color: 'success',

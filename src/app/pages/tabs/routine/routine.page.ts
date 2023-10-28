@@ -31,11 +31,17 @@ export class RoutinePage {
   }
 
   ionViewDidEnter() {
-    this.getRoutine()
+    this.getRoutine();
+    this.getUser();
   }
 
   getRoutine() {
-    this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+    if (this.utilSvc.getElementFromLocalStorage("routine")) {
+      this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+    } else {
+      this.routine = new Routine();
+    }
+
   }
 
   substractExerciseToRoutine(exercise: Exercise) {
@@ -80,6 +86,28 @@ export class RoutinePage {
 
   onRestTimeChange(event) {
     this.restTime = event.detail.value;
+  }
+
+  cleanRoutine() {
+    this.utilSvc.presentAlert({
+      header: 'Clean routine',
+      message: 'Are you sure you want to clean the routine?',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'yes, clean it',
+          handler: () => {
+            const cleanRoutine: Routine = new Routine()
+            this.utilSvc.setElementInLocalStorage("routine", cleanRoutine)
+            this.getRoutine();
+          },
+        },
+      ],
+    });
   }
 
   async openModalGetRoutines() {

@@ -61,13 +61,17 @@
   </div>
 
   <div class="centered-button">
-    <ion-button shape="round" color="success" (click)="saveRoutine()">
+    <ion-button *ngIf="routine.exercises.length && user" shape="round" color="success" (click)="saveRoutine()">
       Save
       <ion-icon slot="end" name="bookmark-outline"></ion-icon>
     </ion-button>
     <ion-button *ngIf="user" (click)="openModalGetRoutines()" shape="round">
       Load
       <ion-icon slot="end" name="stopwatch-outline"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="routine.exercises.length" (click)="cleanRoutine()" shape="round">
+      Clean
+      <ion-icon slot="end" name="refresh-outline"></ion-icon>
     </ion-button>
   </div>
 

@@ -81,18 +81,9 @@ export class FirebaseService {
     return this.db.doc(path).collection(subCollectionName).add(object);
   }
 
-  updateSubDocument(collectionName: string, documentId: string, subCollectionName: string, subDocumentId: string, object: any) {
-    return this.db
-      .collection(collectionName)
-      .doc(documentId)
-      .collection(subCollectionName)
-      .doc(subDocumentId)
-      .update(object);
-  }
-
   // Método para actualizar un documento en una colección en lugar de una subcolección
-  updateDocument(collectionName: string, documentId: string, object: any) {
-    return this.db.collection(collectionName).doc(documentId).update(object);
+  updateDocument(path: string, object: any) {
+    return this.db.doc(path).update(object);
   }
 
   // Método para eliminar un documento de una colección en lugar de una subcolección
