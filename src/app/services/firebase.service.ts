@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -67,8 +67,27 @@ export class FirebaseService {
       .valueChanges({ idField: 'id' });
   }
 
+  routineAlreadyExist(routine_id: string, user_id: string): Observable<boolean> {
+    // Primero, obtén todas las rutinas del usuario
+    return this.getSubcollecion(`users/${user_id}`, 'routines').pipe(
+      map((routines: any[]) => {
+        // Verifica si la rutina con el ID dado ya existe
+        return routines.some(routine => routine.id === routine_id);
+      })
+    );
+  }
+
   addSubcollecion(path: string, subCollectionName: string, object: any) {
     return this.db.doc(path).collection(subCollectionName).add(object);
+  }
+
+  updateSubDocument(collectionName: string, documentId: string, subCollectionName: string, subDocumentId: string, object: any) {
+    return this.db
+      .collection(collectionName)
+      .doc(documentId)
+      .collection(subCollectionName)
+      .doc(subDocumentId)
+      .update(object);
   }
 
   // Método para actualizar un documento en una colección en lugar de una subcolección
