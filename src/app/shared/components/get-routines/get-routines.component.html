@@ -1,0 +1,17 @@
+<ion-content>
+  <app-header
+    color="dark"
+    [centerTitle]="true"
+    [isModal]="true"
+    title="Routines"    
+  ></app-header>
+  <ion-text color="primary">
+    <h1> Your Routines</h1>
+  </ion-text>
+  <ion-list>
+    <ion-item *ngFor="let routine of routines">
+      <ion-label>{{ routine.name }}</ion-label>
+      <ion-button (click)="loadRoutine(routine)">Load</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

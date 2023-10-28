@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title> Home </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +11,22 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-searchbar animated="true" placeholder="Search exercise..." show-clear-button="focus" (ionInput)="searchExercise($event)"></ion-searchbar>
+  <ion-searchbar
+    animated="true"
+    placeholder="Search exercise..."
+    show-clear-button="focus"
+    (ionInput)="searchExercise($event)"
+  ></ion-searchbar>
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Select a category" (ionChange)="onCategoryChange($event)">
-        <ion-select-option *ngFor="let category of getExerciseCategories()" [value]="category">
+      <ion-select
+        placeholder="Select a category"
+        (ionChange)="onCategoryChange($event)"
+      >
+        <ion-select-option
+          *ngFor="let category of getExerciseCategories()"
+          [value]="category"
+        >
           {{ category }}
         </ion-select-option>
       </ion-select>
@@ -26,19 +35,32 @@
 
   <ion-card *ngFor="let exercise of exercises">
     <ion-card-content class="card-content">
-      <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
+      <img
+        [src]="exercise.image_url"
+        alt="Imagen del ejercicio"
+        class="exercise-image"
+      />
       <div class="exercise-details">
         <ion-card-title>{{ exercise.name }}</ion-card-title>
         <p class="exercise-description">{{ exercise.description }}</p>
-        <ion-button size="small" shape="round" color="success" (click)="addExerciseToRoutine(exercise)">
+        <ion-button
+          size="small"
+          shape="round"
+          color="success"
+          (click)="addExerciseToRoutine(exercise)"
+        >
           Add
           <ion-icon slot="end" name="add-outline"></ion-icon>
         </ion-button>
-        <ion-button size="small" shape="round" color="success" (click)="openModalExerciseDetail(exercise)">
+        <ion-button
+          size="small"
+          shape="round"
+          color="success"
+          (click)="openModalExerciseDetail(exercise)"
+        >
           View Detail
         </ion-button>
       </div>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

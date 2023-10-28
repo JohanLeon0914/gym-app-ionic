@@ -7,6 +7,8 @@ import { DetailExerciseComponent } from './components/detail-exercise/detail-exe
 import { HeaderComponent } from './components/header/header.component';
 import { RoutineModalComponent } from './components/routine-modal/routine-modal.component';
 import { ChronometerComponent } from './components/chronometer/chronometer.component';
+import { SaveRoutineComponent } from './components/save-routine/save-routine.component';
+import { GetRoutinesComponent } from './components/get-routines/get-routines.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { ChronometerComponent } from './components/chronometer/chronometer.compo
     HeaderComponent,
     RoutineModalComponent,
     ChronometerComponent,
+    SaveRoutineComponent,
+    GetRoutinesComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,9 @@ import { ChronometerComponent } from './components/chronometer/chronometer.compo
     DetailExerciseComponent,
     HeaderComponent,
     RoutineModalComponent,
-    ChronometerComponent
+    ChronometerComponent,
+    SaveRoutineComponent,
+    GetRoutinesComponent
   ]
 })
 export class SharedModule { }

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, AlertOptions, LoadingController, LoadingOptions, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
 import { Exercise } from 'src/models/Exercise.model';
+import { Routine } from 'src/models/Routine.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
 
-  private routine: Exercise[] = []
+  routine:Routine = new Routine();
   private isRutineModalOpen:boolean = false;
 
   constructor(
@@ -25,27 +26,33 @@ export class UtilService {
    }
 
   //agregar ejercicio a la rutina
-  addExerciseToRoutine(exercise: Exercise){
-    const existingItem = this.routine.find(item => item.id === exercise.id);
+  addExerciseToRoutine(exercise: Exercise, routine?:Routine){
+    if(routine) {
+      this.routine = routine
+    }
+    const existingItem = this.routine.exercises.find(item => item.id === exercise.id);
 
     if (existingItem) {
       existingItem.sets += 1;
     } else {
-      this.routine.push(exercise)
+      this.routine.exercises.push(exercise)
     } 
     this.setElementInLocalStorage('routine', this.routine);
   }
 
-  removeFromRoutine(exerciseId: string): void {
-    const itemIndex = this.routine.findIndex(item => item.id === exerciseId);
+  removeFromRoutine(exerciseId: string, routine?:Routine): void {
+    if(routine) {
+      this.routine = routine
+    }
+    const itemIndex = this.routine.exercises.findIndex(item => item.id === exerciseId);
   
     if (itemIndex !== -1) {
-      const item = this.routine[itemIndex];
+      const item = this.routine.exercises[itemIndex];
   
       if (item.sets > 1) {
         item.sets -= 1;
       } else {
-        this.routine.splice(itemIndex, 1); 
+        this.routine.exercises.splice(itemIndex, 1); 
       }
       
       this.setElementInLocalStorage('routine', this.routine);

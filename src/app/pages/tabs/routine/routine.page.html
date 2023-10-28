@@ -14,7 +14,7 @@
   </ion-header>
 
   <!-- Verificar si el arreglo "routine" está vacío -->
-  <div *ngIf="routine.length === 0" class="empty-routine-message">
+  <div *ngIf="routine.exercises.length === 0" class="empty-routine-message">
     You don't have any exercises in your routine yet!
   </div>
 
@@ -26,7 +26,15 @@
     </ion-item>
   </ion-list>
 
-  <ion-card *ngFor="let exercise of routine">
+  <ion-text *ngIf="routine.name" color="primary">
+    <h1> {{ routine.name }} </h1>
+  </ion-text>
+
+  <ion-text *ngIf="!routine.name && routine.exercises.length" color="primary">
+    <h1> Unnamed Routine </h1>
+  </ion-text>
+
+  <ion-card *ngFor="let exercise of routine.exercises">
     <ion-card-content class="card-content">
       <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
       <div class="exercise-details">
@@ -46,9 +54,20 @@
   </ion-card>
 
   <div class="centered-button">
-    <ion-button shape="round" color="success" (click)="startRoutine()">
+    <ion-button shape="round" color="secondary" (click)="startRoutine()">
       Start
       <ion-icon slot="end" name="play-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="centered-button">
+    <ion-button shape="round" color="success" (click)="saveRoutine()">
+      Save
+      <ion-icon slot="end" name="bookmark-outline"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="user" (click)="openModalGetRoutines()" shape="round">
+      Load
+      <ion-icon slot="end" name="stopwatch-outline"></ion-icon>
     </ion-button>
   </div>
 

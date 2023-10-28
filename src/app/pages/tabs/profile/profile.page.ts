@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
 import { FirebaseService } from '../../../services/firebase.service';
 import { UtilService } from '../../../services/util.service';
+import { GetRoutinesComponent } from 'src/app/shared/components/get-routines/get-routines.component';
 
 @Component({
   selector: 'app-profile',
@@ -71,6 +72,15 @@ export class ProfilePage implements OnInit {
         },
       ],
     });
+  }
+
+  async openModalGetRoutines() {
+    let res = await this.utilSvc.presentModal({
+      component: GetRoutinesComponent,
+      cssClass: 'add-update-modal',
+    });
+    if (res && res.success) {
+    }
   }
 
 
