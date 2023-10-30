@@ -19,16 +19,17 @@
     </ion-item>
     <ion-item *ngFor="let date_and_rest_time of routine.date_and_rest_time">
       <ion-label>
-        <p>Completed on:</p>
+        <p><b>Completed on:</b></p>
         <p>{{ convertToDisplayDate(date_and_rest_time.completed_date) | date : "short" }}</p>
       </ion-label>
       <ion-label>
-        <p>Rest time:</p>
+        <p><b>Rest time:</b></p>
         <p>{{ date_and_rest_time.rest_time }} Sec</p>
       </ion-label>
-      <ion-note slot="end">
+      <ion-label slot="end">
+        <p><b>Completed</b></p>
         <ion-icon size="large" name="checkmark-outline"></ion-icon>
-      </ion-note>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
