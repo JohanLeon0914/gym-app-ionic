@@ -2,9 +2,9 @@
   <ion-card *ngIf="routine && !rutineEnded" class="exercise-card">
     <ion-card-content>
       <ion-card-title *ngIf="restTime" class="rest-time-title">Rest time</ion-card-title>
-      <ion-card-title *ngIf="!restTime" class="exercise-title">{{ routine[currentExerciseIndex].name }}</ion-card-title>
-      <ion-img *ngIf="!restTime" [src]="routine[currentExerciseIndex].gif_url"
-        alt="{{ routine[currentExerciseIndex].name }}" class="exercise-image"></ion-img>
+      <ion-card-title *ngIf="!restTime" class="exercise-title">{{ routine.exercises[currentExerciseIndex].name }}</ion-card-title>
+      <ion-img *ngIf="!restTime" [src]="routine.exercises[currentExerciseIndex].gif_url"
+        alt="{{ routine.exercises[currentExerciseIndex].name }}" class="exercise-image"></ion-img>
       <ion-img *ngIf="restTime" src="assets/images/rest_time.jpg" alt="Rest Time" class="rest-image"></ion-img>
       <ion-text>
         <p class="time-remaining">Time remaining: {{ currentTime }} seconds</p>
@@ -12,15 +12,15 @@
       <ion-list *ngIf="!restTime" class="exercise-info">
         <ion-item>
           <ion-label>Beginner:</ion-label>
-          <ion-text>{{ routine[currentExerciseIndex].repetitions.begginer }}</ion-text>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.begginer }}</ion-text>
         </ion-item>
         <ion-item>
           <ion-label>Intermediate:</ion-label>
-          <ion-text>{{ routine[currentExerciseIndex].repetitions.intermediate }}</ion-text>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.intermediate }}</ion-text>
         </ion-item>
         <ion-item>
           <ion-label>Advanced:</ion-label>
-          <ion-text>{{ routine[currentExerciseIndex].repetitions.advanced }}</ion-text>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.advanced }}</ion-text>
         </ion-item>
       </ion-list>
       <ion-card class="next-exercise-card" *ngIf="nextExercise && restTime">

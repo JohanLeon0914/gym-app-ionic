@@ -4,4 +4,5 @@ export class Routine {
     id:string
     name:String = ""
     exercises: Exercise[] = []
+    completed_dates: Date[] = [];
 }

@@ -58,8 +58,8 @@ export class HomePage {
   }
 
   addExerciseToRoutine(exercise: Exercise) {
-    const rutine: Routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
-    this.utilSvc.addExerciseToRoutine(exercise, rutine);
+    const routine: Routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+    this.utilSvc.addExerciseToRoutine(exercise, routine);
     this.utilSvc.presentToast({
       message: 'Exercise added to your routine',
       color: 'success',
