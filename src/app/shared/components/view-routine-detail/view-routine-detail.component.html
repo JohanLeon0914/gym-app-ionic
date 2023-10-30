@@ -1,0 +1,30 @@
+<ion-content>
+  <app-header
+    color="dark"
+    [centerTitle]="true"
+    [isModal]="true"
+    title="Routine Detail"
+  ></app-header>
+  <ion-text color="primary">
+    <h1 class="custom-h1">Completed Routine Dates</h1>
+  </ion-text>
+  <ion-text color="success">
+    <h2 class="custom-h2">{{ routine.name }}</h2>
+  </ion-text>
+  <ion-list>
+    <ion-item *ngIf="!routine.completed_dates.length">
+      <ion-text class="empty-routine-message">
+        You haven't completed this routine yet.
+      </ion-text>
+    </ion-item>
+    <ion-item *ngFor="let date of routine.completed_dates">
+      <ion-label>
+        <p>Completed on:</p>
+        <p>{{ convertTimestampToDate(date) | date : "short" }}</p>
+      </ion-label>
+      <ion-note slot="end">
+        <ion-icon size="large" name="checkmark-outline"></ion-icon>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

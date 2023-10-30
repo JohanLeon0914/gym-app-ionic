@@ -90,4 +90,9 @@ export class FirebaseService {
   deleteDocument(collectionName: string, documentId: string) {
     return this.db.collection(collectionName).doc(documentId).delete();
   }
+
+  deleteSubcollectionDocument(path: string, subCollectionName: string, subDocumentId: string) {
+    return this.db.doc(path).collection(subCollectionName).doc(subDocumentId).delete();
+  }
+
 }

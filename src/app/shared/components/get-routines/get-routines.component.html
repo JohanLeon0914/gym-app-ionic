@@ -6,12 +6,25 @@
     title="Routines"    
   ></app-header>
   <ion-text color="primary">
-    <h1> Your Routines</h1>
+    <h1> Your Routines </h1>
   </ion-text>
   <ion-list>
+    <ion-item *ngIf="routines.length === 0">
+      <ion-text class="empty-routine-message">
+        You don't have any saved routines yet!
+      </ion-text>
+    </ion-item>
     <ion-item *ngFor="let routine of routines">
-      <ion-label>{{ routine.name }}</ion-label>
-      <ion-button (click)="loadRoutine(routine)">Load</ion-button>
+      <ion-label class="truncate-text">{{ routine.name }}</ion-label>
+      <ion-button (click)="loadRoutine(routine)">
+        <ion-icon name="download-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="success" (click)="viewRoutineDetail(routine)">
+        <ion-icon name="eye-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="deleteRoutine(routine)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

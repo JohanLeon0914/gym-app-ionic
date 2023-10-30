@@ -123,7 +123,7 @@ export class ChronometerComponent implements OnInit {
   }
 
   saveDateCompleted() {
-    let user: User = this.utilSvc.getElementFromLocalStorage('user');
+    const user: User = this.utilSvc.getElementFromLocalStorage('user');
     const date_completed = new Date()
     this.routine.completed_dates.push(date_completed) 
     this.utilSvc.setElementInLocalStorage("routine", this.routine);
