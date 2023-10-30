@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Exercise } from 'src/models/Exercise.model';
 import { UtilService } from 'src/app/services/util.service';
-import { Routine } from 'src/models/Routine.model';
+import { Date_and_rest_time, Routine } from 'src/models/Routine.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { User } from 'firebase/auth';
 
@@ -125,7 +125,12 @@ export class ChronometerComponent implements OnInit {
   saveDateCompleted() {
     const user: User = this.utilSvc.getElementFromLocalStorage('user');
     const date_completed = new Date()
-    this.routine.completed_dates.push(date_completed) 
+    const date_and_rest_time:Date_and_rest_time = {
+      "completed_date": date_completed,
+      "rest_time": this.restTimeNumber
+    }
+    this.routine.date_and_rest_time.push(date_and_rest_time) 
+    this.routine.rest_time = this.restTimeNumber
     this.utilSvc.setElementInLocalStorage("routine", this.routine);
     if(user && this.routine.id) {
       let path = `users/${user.uid}/routines/${this.routine.id}`;
@@ -133,9 +138,8 @@ export class ChronometerComponent implements OnInit {
       this.utilSvc.presentLoading();
       this.firebaseSvc.updateDocument(path, this.routine).then(res => {
         this.utilSvc.setElementInLocalStorage("routine", this.routine)
-        this.utilSvc.dismissModal({ success: true });
         this.utilSvc.presentToast({
-          message: 'Routine updated successfully',
+          message: 'Routine completed successfully',
           color: 'success',
           icon: 'checkmark-circle-outline',
           duration: 1500

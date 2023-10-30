@@ -12,15 +12,19 @@
     <h2 class="custom-h2">{{ routine.name }}</h2>
   </ion-text>
   <ion-list>
-    <ion-item *ngIf="!routine.completed_dates.length">
+    <ion-item *ngIf="!routine.date_and_rest_time.length">
       <ion-text class="empty-routine-message">
         You haven't completed this routine yet.
       </ion-text>
     </ion-item>
-    <ion-item *ngFor="let date of routine.completed_dates">
+    <ion-item *ngFor="let date_and_rest_time of routine.date_and_rest_time">
       <ion-label>
         <p>Completed on:</p>
-        <p>{{ convertTimestampToDate(date) | date : "short" }}</p>
+        <p>{{ convertToDisplayDate(date_and_rest_time.completed_date) | date : "short" }}</p>
+      </ion-label>
+      <ion-label>
+        <p>Rest time:</p>
+        <p>{{ date_and_rest_time.rest_time }} Sec</p>
       </ion-label>
       <ion-note slot="end">
         <ion-icon size="large" name="checkmark-outline"></ion-icon>
