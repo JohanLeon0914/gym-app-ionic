@@ -4,11 +4,12 @@ export class Routine {
     id:string
     name:String = ""
     exercises: Exercise[] = []
-    date_and_rest_time: Date_and_rest_time[] = [];
+    history: history[] = [];
     rest_time: number = 0;
 }
 
-export interface Date_and_rest_time {
+export class history {
     completed_date: Date
     rest_time: number
+    history_exercises: Exercise[] = []
 }

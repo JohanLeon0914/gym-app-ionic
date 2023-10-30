@@ -1,0 +1,25 @@
+<ion-content>
+  <app-header
+    color="dark"
+    [centerTitle]="true"
+    [isModal]="true"
+    title="Routine Hisory"
+  ></app-header>
+  <ion-text color="primary">
+    <h1 class="custom-h1">routine exercise history</h1>
+  </ion-text>
+  <ion-text color="success">
+    <h2 class="custom-h2">{{ routine.name }}</h2>
+  </ion-text>
+  <ion-card *ngFor="let exercise of history_exercises">
+    <ion-card-content class="card-content">
+      <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
+      <div class="exercise-details">
+        <ion-card-title>{{ exercise.name }}</ion-card-title>
+        <p class="exercise-description">{{ exercise.description }}</p>
+        <p>Sets: {{ exercise.sets }}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>

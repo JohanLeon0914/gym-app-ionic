@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Timestamp } from 'firebase/firestore';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilService } from 'src/app/services/util.service';
 import { Routine } from 'src/models/Routine.model';
+import { ViewRoutineHistoryComponent } from '../view-routine-history/view-routine-history.component';
+import { Exercise } from 'src/models/Exercise.model';
 
 @Component({
   selector: 'app-view-routine-detail',
@@ -12,7 +15,7 @@ export class ViewRoutineDetailComponent  implements OnInit {
 
   @Input() routine: Routine
 
-  constructor(private firebaseSvc: FirebaseService) { }
+  constructor(private firebaseSvc: FirebaseService, private utilSvc: UtilService) { }
 
   ngOnInit() {}
 
@@ -25,6 +28,15 @@ export class ViewRoutineDetailComponent  implements OnInit {
     
     // Si el valor no se puede convertir, regresa null 
     return null;
+  }
+
+  viewHistoryOfRoutine(history_exercises:Exercise[]) {
+    const routine = this.routine
+      this.utilSvc.presentModal({
+        component: ViewRoutineHistoryComponent,
+        componentProps: { routine, history_exercises },
+        cssClass: 'add-update-modal',
+      });
   }
 
 }

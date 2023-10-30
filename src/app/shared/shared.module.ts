@@ -10,6 +10,7 @@ import { ChronometerComponent } from './components/chronometer/chronometer.compo
 import { SaveRoutineComponent } from './components/save-routine/save-routine.component';
 import { GetRoutinesComponent } from './components/get-routines/get-routines.component';
 import { ViewRoutineDetailComponent } from './components/view-routine-detail/view-routine-detail.component';
+import { ViewRoutineHistoryComponent } from './components/view-routine-history/view-routine-history.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ViewRoutineDetailComponent } from './components/view-routine-detail/vie
     ChronometerComponent,
     SaveRoutineComponent,
     GetRoutinesComponent,
-    ViewRoutineDetailComponent
+    ViewRoutineDetailComponent,
+    ViewRoutineHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { ViewRoutineDetailComponent } from './components/view-routine-detail/vie
     ChronometerComponent,
     SaveRoutineComponent,
     GetRoutinesComponent,
-    ViewRoutineDetailComponent
+    ViewRoutineDetailComponent,
+    ViewRoutineHistoryComponent,
   ]
 })
 export class SharedModule { }
