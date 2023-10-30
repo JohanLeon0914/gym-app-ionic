@@ -54,7 +54,7 @@
   </ion-card>
 
   <div class="centered-button">
-    <ion-button shape="round" color="secondary" (click)="startRoutine()">
+    <ion-button *ngIf="routine.exercises.length" shape="round" color="secondary" (click)="startRoutine()">
       Start
       <ion-icon slot="end" name="play-outline"></ion-icon>
     </ion-button>
