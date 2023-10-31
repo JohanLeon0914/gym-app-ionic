@@ -12,18 +12,46 @@
         <p class="time-remaining">Time remaining: {{ currentTime }} seconds</p>
       </ion-text>
       <ion-list *ngIf="!restTime" class="exercise-info">
-        <ion-item>
-          <ion-label>Beginner:</ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.begginer }}</ion-text>
+
+        <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Weight:</b></ion-label>
+          <ion-text>Corporal Weight</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-label>Intermediate:</ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.intermediate }}</ion-text>
+
+        <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Repetitions:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.begginer[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.begginer[1] }}</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-label>Advanced:</ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.advanced }}</ion-text>
+      
+        <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Repetitions Beginner:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.begginer[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.begginer[1] }}</ion-text>
         </ion-item>
+
+        <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Weight Beginner:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].weight.begginer[0] }} KG - {{ routine.exercises[currentExerciseIndex].weight.begginer[1] }} KG</ion-text>
+        </ion-item>
+
+        <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Repetitions Intermediate:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.intermediate[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.intermediate[1] }}</ion-text>
+        </ion-item>
+
+        <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Weight Intermediate:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].weight.intermediate[0] }} KG - {{ routine.exercises[currentExerciseIndex].weight.intermediate[1] }} KG</ion-text>
+        </ion-item>
+      
+        <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Repetitions Advanced:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.advanced[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.advanced[1] }}</ion-text>
+        </ion-item>
+        <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
+          <ion-label><b>Weight Advanced:</b></ion-label>
+          <ion-text>{{ routine.exercises[currentExerciseIndex].weight.advanced[0] }} KG - {{ routine.exercises[currentExerciseIndex].weight.advanced[1] }} KG </ion-text>
+        </ion-item>
+
       </ion-list>
       <ion-card class="next-exercise-card" *ngIf="nextExercise && restTime">
         <ion-card-content>

@@ -7,11 +7,18 @@ export interface Exercise {
     repetitions:Repetitions,
     category:string,
     run_time:number,
+    weight?: Weight,
     sets:number
 }
 
 interface Repetitions {
-    begginer:number,
-    intermediate:number,
-    advanced:number
+    begginer:number[],
+    intermediate:number[],
+    advanced:number[]
+}
+
+interface Weight {
+    begginer:number[],
+    intermediate:number[],
+    advanced:number[]
 }

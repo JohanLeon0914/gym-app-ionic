@@ -12,19 +12,45 @@
       </div>
       <ion-card-title>{{ exercise.name }}</ion-card-title>
       <p class="exercise-description">{{ exercise.description }}</p>
-      <p class="repetitions-txt">Repeticiones</p>
+      <p class="repetitions-txt">Repetitions and Weight</p>
       <ion-list>
-        <ion-item>
-          <ion-label>Beginner:</ion-label>
-          <ion-text>{{ exercise.repetitions.begginer }}</ion-text>
+        <ion-item *ngIf="!exercise.weight">
+          <ion-label><b>Weight:</b></ion-label>
+          <ion-text>Corporal Weight</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-label>Intermediate:</ion-label>
-          <ion-text>{{ exercise.repetitions.intermediate }}</ion-text>
+
+        <ion-item *ngIf="exercise.weight">
+          <ion-label><b>Repetitions:</b></ion-label>
+          <ion-text>{{ exercise.repetitions.begginer[0] }} - {{ exercise.repetitions.begginer[1] }}</ion-text>
         </ion-item>
-        <ion-item>
-          <ion-label>Advanced:</ion-label>
-          <ion-text>{{ exercise.repetitions.advanced }}</ion-text>
+      
+        <ion-item *ngIf="!exercise.weight">
+          <ion-label><b>Repetitions Beginner:</b></ion-label>
+          <ion-text>{{ exercise.repetitions.begginer[0] }} - {{ exercise.repetitions.begginer[1] }}</ion-text>
+        </ion-item>
+
+        <ion-item *ngIf="exercise.weight">
+          <ion-label><b>Weight Beginner:</b></ion-label>
+          <ion-text>{{ exercise.weight.begginer[0] }} KG - {{ exercise.weight.begginer[1] }} KG</ion-text>
+        </ion-item>
+
+        <ion-item *ngIf="!exercise.weight">
+          <ion-label><b>Repetitions Intermediate:</b></ion-label>
+          <ion-text>{{ exercise.repetitions.intermediate[0] }} - {{ exercise.repetitions.intermediate[0] }}</ion-text>
+        </ion-item>
+
+        <ion-item *ngIf="exercise.weight">
+          <ion-label><b>Weight Intermediate:</b></ion-label>
+          <ion-text>{{ exercise.weight.intermediate[0] }} KG - {{ exercise.weight.intermediate[1] }} KG</ion-text>
+        </ion-item>
+      
+        <ion-item *ngIf="!exercise.weight">
+          <ion-label><b>Repetitions Advanced:</b></ion-label>
+          <ion-text>{{ exercise.repetitions.advanced[0] }} - {{ exercise.repetitions.advanced[0] }}</ion-text>
+        </ion-item>
+        <ion-item *ngIf="exercise.weight">
+          <ion-label><b>Weight Advanced:</b></ion-label>
+          <ion-text>{{ exercise.weight.advanced[0] }} KG - {{ exercise.weight.advanced[1] }} KG </ion-text>
         </ion-item>
       </ion-list>
     </ion-card-content>

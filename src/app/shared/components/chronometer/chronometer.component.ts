@@ -140,12 +140,6 @@ export class ChronometerComponent implements OnInit {
       this.utilSvc.setElementInLocalStorage("routine", this.routine);
       this.firebaseSvc.updateDocument(path, this.routine).then(res => {
         this.utilSvc.setElementInLocalStorage("routine", this.routine)
-        this.utilSvc.presentToast({
-          message: 'Routine completed successfully',
-          color: 'success',
-          icon: 'checkmark-circle-outline',
-          duration: 1500
-        });
       }, error => {
         this.utilSvc.dismissModal({ success: true });
         this.utilSvc.presentToast({
