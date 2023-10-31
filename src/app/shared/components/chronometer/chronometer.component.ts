@@ -44,7 +44,7 @@ export class ChronometerComponent implements OnInit {
 
   startRoutine() {
     this.currentExercise = this.routine.exercises[this.currentExerciseIndex];
-    if (this.currentExerciseIndex < this.routine.exercises.length) {
+    if ((this.currentExerciseIndex < this.routine.exercises.length) && this.utilSvc.getIsRoutineModalOpen()) {
       if (this.preparationTime) {
         this.runTimerForPreparationTime()
       } else if (this.restTime) {
