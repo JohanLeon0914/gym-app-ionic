@@ -1,16 +1,16 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>
-        Profile
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-header
+    color="dark"
+    [centerTitle]="false"
+    [isModal]="false"
+    title="Profile"
+  ></app-header>
+
   <div class="content ion-text-center">
     <div *ngIf="user" class="avatar-container">
       <div class="avatar-wrapper">
         <ion-avatar class="avatar">
-          <img [src]="user?.photoURL">
+          <img [src]="user?.photoURL" />
         </ion-avatar>
       </div>
     </div>
@@ -22,7 +22,12 @@
       <ion-icon slot="end" name="logo-google"></ion-icon>
     </ion-button>
 
-    <ion-button *ngIf="user" color="tertiary" (click)="openModalGetRoutines()" shape="round">
+    <ion-button
+      *ngIf="user"
+      color="tertiary"
+      (click)="openModalGetRoutines()"
+      shape="round"
+    >
       Routines
       <ion-icon slot="end" name="stopwatch-outline"></ion-icon>
     </ion-button>

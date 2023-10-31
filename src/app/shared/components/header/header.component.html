@@ -12,5 +12,16 @@
 
     <ion-title *ngIf="title" [ngClass]="{'ion-text-center': centerTitle}">{{ title }}</ion-title>
 
+    <ion-buttons slot="end" *ngIf="!isModal">
+      <ion-button (click)="setTheme(false)" *ngIf="darkMode.value">
+        <ion-icon name="sunny-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="setTheme(true)" *ngIf="!darkMode.value">
+        <ion-icon name="moon-outline"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>

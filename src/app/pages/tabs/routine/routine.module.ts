@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { RoutinePage } from './routine.page';
 
 import { RoutinePageRoutingModule } from './routine-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RoutinePageRoutingModule
+    RoutinePageRoutingModule,
+    SharedModule
   ],
   declarations: [RoutinePage]
 })

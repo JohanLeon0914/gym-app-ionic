@@ -1,8 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Routine </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header
+  color="dark"
+  [centerTitle]="false"
+  [isModal]="false"
+  title="Routine"
+></app-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -73,7 +74,12 @@
 
   <ion-row class="centered-button">
     <ion-col *ngIf="routine.exercises.length">
-      <ion-button expand="full" color="dark" shape="round" (click)="startRoutine()">
+      <ion-button
+        expand="full"
+        color="dark"
+        shape="round"
+        (click)="startRoutine()"
+      >
         <ion-label>Start</ion-label>
         <ion-icon name="play-outline" slot="end"></ion-icon>
       </ion-button>
@@ -82,23 +88,38 @@
 
   <ion-row class="centered-button">
     <ion-col *ngIf="routine.exercises.length && user">
-      <ion-button expand="full" shape="round" color="success" (click)="saveRoutine()">
+      <ion-button
+        expand="full"
+        shape="round"
+        color="success"
+        (click)="saveRoutine()"
+      >
         <ion-label>Save</ion-label>
         <ion-icon name="bookmark-outline" slot="end"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col *ngIf="routine.exercises.length">
-      <ion-button expand="full" color="warning" shape="round" (click)="cleanRoutine()">
+      <ion-button
+        expand="full"
+        color="warning"
+        shape="round"
+        (click)="cleanRoutine()"
+      >
         <ion-label>Clean</ion-label>
         <ion-icon name="refresh-outline" slot="end"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button *ngIf="user" color="tertiary" expand="full" shape="round" (click)="openModalGetRoutines()">
+      <ion-button
+        *ngIf="user"
+        color="tertiary"
+        expand="full"
+        shape="round"
+        (click)="openModalGetRoutines()"
+      >
         <ion-label>Routines</ion-label>
         <ion-icon name="stopwatch-outline" slot="end"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>
-
 </ion-content>
