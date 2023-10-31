@@ -1,11 +1,13 @@
 <ion-content>
   <ion-card *ngIf="routine && !rutineEnded" class="exercise-card">
     <ion-card-content>
-      <ion-card-title *ngIf="restTime" class="rest-time-title">Rest time</ion-card-title>
+      <ion-card-title *ngIf="restTime && !preparationTime" class="rest-time-title">Rest time</ion-card-title>
+      <ion-card-title *ngIf="preparationTime" class="rest-time-title">Preparation time</ion-card-title>
       <ion-card-title *ngIf="!restTime" class="exercise-title">{{ routine.exercises[currentExerciseIndex].name }}</ion-card-title>
       <ion-img *ngIf="!restTime" [src]="routine.exercises[currentExerciseIndex].gif_url"
         alt="{{ routine.exercises[currentExerciseIndex].name }}" class="exercise-image"></ion-img>
-      <ion-img *ngIf="restTime" src="assets/images/rest_time.jpg" alt="Rest Time" class="rest-image"></ion-img>
+      <ion-img *ngIf="restTime && !preparationTime" src="assets/images/rest_time_2.jpg" alt="Rest Time" class="rest-image"></ion-img>
+      <ion-img *ngIf="preparationTime" src="assets/images/preparation_time.jpg" alt="Rest Time" class="rest-image"></ion-img>
       <ion-text>
         <p class="time-remaining">Time remaining: {{ currentTime }} seconds</p>
       </ion-text>
