@@ -113,7 +113,9 @@ export class ChronometerComponent implements OnInit {
           this.startNextExercise();
         } else {
           this.rutineEnded = true;
-          this.saveDateCompleted()
+          if(this.utilSvc.getIsRoutineModalOpen()) {
+            this.saveDateCompleted()
+          }
         }
       }
       if (this.currentTime === 4 && this.utilSvc.getIsRoutineModalOpen()) {
@@ -136,7 +138,6 @@ export class ChronometerComponent implements OnInit {
     if(user && this.routine.id) {
       let path = `users/${user.uid}/routines/${this.routine.id}`;
       this.utilSvc.setElementInLocalStorage("routine", this.routine);
-      this.utilSvc.presentLoading();
       this.firebaseSvc.updateDocument(path, this.routine).then(res => {
         this.utilSvc.setElementInLocalStorage("routine", this.routine)
         this.utilSvc.presentToast({
@@ -145,7 +146,6 @@ export class ChronometerComponent implements OnInit {
           icon: 'checkmark-circle-outline',
           duration: 1500
         });
-        this.utilSvc.dismissLoading();
       }, error => {
         this.utilSvc.dismissModal({ success: true });
         this.utilSvc.presentToast({

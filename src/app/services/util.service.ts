@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, AlertOptions, LoadingController, LoadingOptions, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 import { Exercise } from 'src/models/Exercise.model';
 import { Routine } from 'src/models/Routine.model';
 
@@ -10,7 +11,7 @@ import { Routine } from 'src/models/Routine.model';
 export class UtilService {
 
   routine:Routine = new Routine();
-  private isRutineModalOpen:boolean = false;
+  private isRutineModalOpen: boolean = false;
 
   constructor(
     private loadingController: LoadingController,
@@ -107,7 +108,6 @@ export class UtilService {
 
   //modal
   async presentModal(opts: ModalOptions) {
-    this.isRutineModalOpen = true;
     const modal = await this.modalController.create(opts);
     await modal.present();
     //la data que puede que devuelva el modal al cerrarse
@@ -118,12 +118,15 @@ export class UtilService {
   }
   //si cierras la modal y quieras devolver una data, se pasa atraves de esta funcion
   dismissModal(data?: any){
-    this.isRutineModalOpen = false;
     this.modalController.dismiss(data);
   }
 
   getIsRoutineModalOpen() {
     return this.isRutineModalOpen;
+  }
+
+  setIsRoutineModalOpen(isRoutineModalOpen: boolean) {
+    this.isRutineModalOpen = isRoutineModalOpen
   }
 
 }

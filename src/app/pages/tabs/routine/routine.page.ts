@@ -57,13 +57,15 @@ export class RoutinePage {
   async startRoutine() {
     if (this.restTime != 0) {
       const restTime = this.restTime
+      this.utilSvc.setIsRoutineModalOpen(true);
       let res = await this.utilSvc.presentModal({
         component: RoutineModalComponent,
         componentProps: { restTime },
         cssClass: 'add-update-modal',
       });
       if (res && res.success) {
-        this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+        this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine;
+        this.utilSvc.setIsRoutineModalOpen(false);
       }
     } else {
       this.utilSvc.presentToast({
