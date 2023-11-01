@@ -160,6 +160,41 @@
         fill="outline"
         placeholder="Enter your note here"
       ></ion-textarea>
+      <ion-button
+        class="center-button"
+        expand="full"
+        shape="round"
+        color="success"
+        (click)="saveNoteRoutine()"
+      >
+        <ion-label>Save</ion-label>
+        <ion-icon name="bookmark-outline" slot="end"></ion-icon>
+      </ion-button>
     </ion-card-content>
   </ion-card>
+
+  <ion-row>
+    <ion-col size="6" *ngFor="let exercise of routine.exercises">
+      <ion-card class="exercise-card">
+        <ion-card-header>
+          <ion-card-title class="notes-title">{{
+            exercise.name
+          }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="center-button">
+          <ion-button
+            size="small"
+            shape="round"
+            color="success"
+            (click)="makeNoteExercise(exercise)"
+          >
+            Make a Note
+            <ion-icon slot="end" name="clipboard-outline"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-item-divider />
+    <ion-item-divider />
+  </ion-row>
 </ion-content>

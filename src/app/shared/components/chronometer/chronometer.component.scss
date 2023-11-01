@@ -23,10 +23,20 @@
     font-weight: bold;
     margin-top: 10px;
   }
+
+  ion-textarea {
+    margin-bottom: 20px;
+  }
   
   .notes-description {
     font-size: 16px;
     margin-bottom: 10px;
+  }
+
+  .center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Opcional, para centrar verticalmente el botón */
   }
 
   .div-notes {

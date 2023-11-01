@@ -169,4 +169,13 @@ export class ChronometerComponent implements OnInit {
     clearInterval(this.timer);
     this.startRoutine();
   }
+
+  makeNoteExercise(exercise:Exercise) {
+    
+  }
+
+  saveNoteRoutine() {
+
+  }
+
 }
