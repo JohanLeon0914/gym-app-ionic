@@ -8,7 +8,8 @@ export interface Exercise {
     category:string,
     run_time:number,
     weight?: Weight,
-    sets:number
+    sets:number,
+    note?:string,
 }
 
 interface Repetitions {

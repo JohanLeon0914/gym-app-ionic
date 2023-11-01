@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UtilService } from 'src/app/services/util.service';
 import { Exercise } from 'src/models/Exercise.model';
 import { Routine } from 'src/models/Routine.model';
 
@@ -12,8 +13,22 @@ export class ViewRoutineHistoryComponent  implements OnInit {
   @Input() routine: Routine
   @Input() history_exercises: Exercise[]
 
-  constructor() { }
+  constructor(private utilSvc: UtilService) { }
 
   ngOnInit() {}
+
+  getNoteExercise(exercise:Exercise) {
+    this.utilSvc.presentAlert({
+      header: 'Exercise note: ' + exercise.name,
+      message: exercise.note,
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Close',
+          role: 'cancel',
+        },
+      ],
+    });
+  }
 
 }

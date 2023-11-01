@@ -143,7 +143,7 @@
 
   <ion-item-divider />
 
-  <ion-card *ngIf="routineEnded" class="div-notes">
+  <ion-card *ngIf="routineEnded && routine.id" class="div-notes">
     <ion-card-header>
       <ion-card-title class="notes-title">Notes</ion-card-title>
     </ion-card-header>
@@ -174,8 +174,8 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-row>
-    <ion-col size="6" *ngFor="let exercise of routine.exercises">
+  <ion-row *ngIf="routineEnded && routine.id">
+    <ion-col size="6" *ngFor="let exercise of routine.exercises; index as i">
       <ion-card class="exercise-card">
         <ion-card-header>
           <ion-card-title class="notes-title">{{
@@ -187,7 +187,7 @@
             size="small"
             shape="round"
             color="success"
-            (click)="makeNoteExercise(exercise)"
+            (click)="makeNoteExercise(exercise, i)"
           >
             Make a Note
             <ion-icon slot="end" name="clipboard-outline"></ion-icon>
@@ -195,7 +195,6 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-item-divider />
     <ion-item-divider />
   </ion-row>
 </ion-content>

@@ -23,7 +23,7 @@ export class ChronometerComponent implements OnInit {
   timer: any;
   currentTime: number = 0;
   restTime: boolean = true;
-  routineEnded: boolean = true;
+  routineEnded: boolean = false;
   currentExercise: Exercise;
   setsCount: number = 0;
   nextExercise: Exercise | null = null;
@@ -171,35 +171,65 @@ export class ChronometerComponent implements OnInit {
     this.startRoutine();
   }
 
-  makeNoteExercise(exercise:Exercise) {
-    
+  makeNoteExercise(exercise: Exercise, index: number) {
+    this.utilSvc.presentAlert({
+      header: 'Exercise note',
+      message: 'Make a note for this exercise: ' + exercise.name,
+      mode: 'ios',
+      inputs: [
+        {
+          type: 'textarea',
+          placeholder: 'Make your note',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Save',
+          handler: (data) => {
+            this.routine.exercises[index].note = data[0]; 
+            this.updateRoutine("Note added to your exercise: " + exercise.name)
+          },
+        },
+      ],
+    });
   }
 
   saveNoteRoutine() {
-    const user: User = this.utilSvc.getElementFromLocalStorage('user');
     this.routine.note = this.routineNote;
+    this.routineNote = "";
+    this.updateRoutine("Note added to your routine");
+  }
+
+  updateRoutine(message: string) {
+    const user: User = this.utilSvc.getElementFromLocalStorage('user');
     let path = `users/${user.uid}/routines/${this.routine.id}`;
     this.utilSvc.presentLoading();
-    this.firebaseSvc.updateDocument(path, this.routine).then(res => {
-      this.utilSvc.setElementInLocalStorage("routine", this.routine)
-      this.utilSvc.presentToast({
-        message: 'Note added to your routine',
-        color: 'success',
-        icon: 'checkmark-circle-outline',
-        duration: 1000,
-      });
-      this.utilSvc.dismissLoading();
-    }, error => {
-      this.utilSvc.dismissModal({ success: true });
-      this.utilSvc.presentToast({
-        message: error,
-        color: 'warning',
-        icon: 'alert-circle-outline',
-        duration: 5000
-      });
-      this.utilSvc.dismissLoading();
-    });
-    this.utilSvc.dismissLoading();
+    this.firebaseSvc.updateDocument(path, this.routine).then(
+      res => {
+        this.utilSvc.setElementInLocalStorage("routine", this.routine);
+        this.utilSvc.presentToast({
+          message: message,
+          color: 'success',
+          icon: 'checkmark-circle-outline',
+          duration: 1000,
+        });
+        this.utilSvc.dismissLoading(); 
+      },
+      error => {
+        this.utilSvc.dismissModal({ success: true });
+        this.utilSvc.presentToast({
+          message: error,
+          color: 'warning',
+          icon: 'alert-circle-outline',
+          duration: 5000,
+        });
+        this.utilSvc.dismissLoading();
+      }
+    );
   }
 
 }

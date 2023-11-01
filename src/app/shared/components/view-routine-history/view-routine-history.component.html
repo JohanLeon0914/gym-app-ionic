@@ -11,15 +11,43 @@
   <ion-text color="success">
     <h2 class="custom-h2">{{ routine.name }}</h2>
   </ion-text>
+
+  <ion-card *ngIf="routine.note">
+    <ion-card-header>
+      <ion-card-title class="notes-title">Routine Note</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="notes-description">
+        {{ routine.note }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
   <ion-card *ngFor="let exercise of history_exercises">
+    <ion-card-header>
+      <ion-card-title class="notes-title">{{ exercise.name }} </ion-card-title>
+    </ion-card-header>
     <ion-card-content class="card-content">
-      <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
-      <div class="exercise-details">
-        <ion-card-title>{{ exercise.name }}</ion-card-title>
-        <p class="exercise-description">{{ exercise.description }}</p>
-        <p>Sets: {{ exercise.sets }}</p>
+      <img
+        [src]="exercise.image_url"
+        alt="Imagen del ejercicio"
+        class="exercise-image"
+      />
+      <div>
+        <p class="ion-text">{{ exercise.description }}</p>
+        <p class="ion-text">Sets: {{ exercise.sets }}</p>
+        <ion-button
+          *ngIf="exercise.note"
+          class="center-button"
+          size="small"
+          shape="round"
+          color="success"
+          (click)="getNoteExercise(exercise)"
+        >
+          Get note
+          <ion-icon slot="end" name="clipboard-outline"></ion-icon>
+        </ion-button>
       </div>
     </ion-card-content>
   </ion-card>
-  
 </ion-content>
