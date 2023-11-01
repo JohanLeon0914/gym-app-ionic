@@ -141,7 +141,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-item-divider />
+  <ion-item-divider *ngIf="routineEnded && routine.id"/>
 
   <ion-card *ngIf="routineEnded && routine.id" class="div-notes">
     <ion-card-header>
@@ -187,7 +187,7 @@
             size="small"
             shape="round"
             color="success"
-            (click)="makeNoteExercise(exercise, i)"
+            (click)="makeNoteExercise(exercise)"
           >
             Make a Note
             <ion-icon slot="end" name="clipboard-outline"></ion-icon>
@@ -195,6 +195,7 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-item-divider />
+    <ion-item-divider *ngIf="routine.exercises.length > 2"/>
+    <ion-item-divider *ngIf="routine.exercises.length > 2"/>
   </ion-row>
 </ion-content>

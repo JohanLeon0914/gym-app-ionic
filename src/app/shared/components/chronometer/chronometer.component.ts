@@ -178,7 +178,7 @@ export class ChronometerComponent implements OnInit {
     this.startRoutine();
   }
 
-  makeNoteExercise(exercise: Exercise, index: number) {
+  makeNoteExercise(exercise: Exercise) {
     this.utilSvc.presentAlert({
       header: 'Exercise note',
       message: 'Make a note for this exercise: ' + exercise.name,
