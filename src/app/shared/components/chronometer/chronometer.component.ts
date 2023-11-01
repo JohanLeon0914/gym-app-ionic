@@ -157,7 +157,7 @@ export class ChronometerComponent implements OnInit {
 
   cleanExercisesNotes() {
     for (const exercise of this.routine.exercises) {
-      exercise.note = ""; 
+      exercise.note = "";
     }
   }
 
@@ -187,6 +187,9 @@ export class ChronometerComponent implements OnInit {
         {
           type: 'textarea',
           placeholder: 'Make your note',
+          attributes: {
+            minlength: 1,
+          },
         },
       ],
       buttons: [
@@ -197,21 +200,30 @@ export class ChronometerComponent implements OnInit {
         {
           text: 'Save',
           handler: (data) => {
-            const historyExercise = this.routine.history[this.routine.history.length - 1].history_exercises.find((ex) => ex.id === exercise.id);
+            if (!data[0]) {
+              this.utilSvc.presentToast({
+                message: "You haven't written any exercise notes yet",
+                color: 'danger',
+                icon: 'checkmark-circle-outline',
+                duration: 1500,
+              });
+            } else {
+              const historyExercise = this.routine.history[this.routine.history.length - 1].history_exercises.find((ex) => ex.id === exercise.id);
 
-            if (historyExercise) {
-              // Modifica la propiedad de nota del ejercicio encontrado
-              historyExercise.note = data[0];
+              if (historyExercise) {
+                // Modifica la propiedad de nota del ejercicio encontrado
+                historyExercise.note = data[0];
 
-              // Encuentra el índice del ejercicio en el array history_exercises
-              const exerciseIndex = this.routine.history[this.routine.history.length - 1].history_exercises.findIndex((ex) => ex.id === exercise.id);
+                // Encuentra el índice del ejercicio en el array history_exercises
+                const exerciseIndex = this.routine.history[this.routine.history.length - 1].history_exercises.findIndex((ex) => ex.id === exercise.id);
 
-              if (exerciseIndex !== -1) {
-                // Actualiza el ejercicio en el array history_exercises
-                this.routine.history[this.routine.history.length - 1].history_exercises[exerciseIndex] = historyExercise;
+                if (exerciseIndex !== -1) {
+                  // Actualiza el ejercicio en el array history_exercises
+                  this.routine.history[this.routine.history.length - 1].history_exercises[exerciseIndex] = historyExercise;
 
-                // Llama a la función para actualizar la rutina
-                this.updateRoutine("Note added to your exercise: " + exercise.name);
+                  // Llama a la función para actualizar la rutina
+                  this.updateRoutine("Note added to your exercise: " + exercise.name);
+                }
               }
             }
           },
@@ -221,9 +233,19 @@ export class ChronometerComponent implements OnInit {
   }
 
   saveNoteRoutine() {
-    this.routine.history[this.routine.history.length - 1].note = this.routineNote;
-    this.routineNote = "";
-    this.updateRoutine("Note added to your routine");
+    if (this.routineNote) {
+      this.routine.history[this.routine.history.length - 1].note = this.routineNote;
+      this.routineNote = "";
+      this.updateRoutine("Note added to your routine");
+    } else {
+      this.utilSvc.presentToast({
+        message: "You haven't written any routine notes yet",
+        color: 'danger',
+        icon: 'checkmark-circle-outline',
+        duration: 1500,
+      });
+    }
+
   }
 
   updateRoutine(message: string) {
