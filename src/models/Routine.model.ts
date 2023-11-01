@@ -6,6 +6,7 @@ export class Routine {
     exercises: Exercise[] = []
     history: history[] = [];
     rest_time: number = 0;
+    notes?: string = "";
 }
 
 export class history {

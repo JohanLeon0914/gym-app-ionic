@@ -1,18 +1,39 @@
 <ion-content>
-  <ion-card *ngIf="routine && !rutineEnded" class="exercise-card">
+  <ion-card *ngIf="routine && !routineEnded" class="exercise-card">
     <ion-card-content>
-      <ion-card-title *ngIf="restTime && !preparationTime" class="rest-time-title">Rest time</ion-card-title>
-      <ion-card-title *ngIf="preparationTime" class="rest-time-title">Preparation time</ion-card-title>
-      <ion-card-title *ngIf="!restTime" class="exercise-title">{{ routine.exercises[currentExerciseIndex].name }}</ion-card-title>
-      <ion-img *ngIf="!restTime" [src]="routine.exercises[currentExerciseIndex].gif_url"
-        alt="{{ routine.exercises[currentExerciseIndex].name }}" class="exercise-image"></ion-img>
-      <ion-img *ngIf="restTime && !preparationTime" src="assets/images/rest_time_2.jpg" alt="Rest Time" class="rest-image"></ion-img>
-      <ion-img *ngIf="preparationTime" src="assets/images/preparation_time.jpg" alt="Rest Time" class="rest-image"></ion-img>
+      <ion-card-title
+        *ngIf="restTime && !preparationTime"
+        class="rest-time-title"
+        >Rest time</ion-card-title
+      >
+      <ion-card-title *ngIf="preparationTime" class="rest-time-title"
+        >Preparation time</ion-card-title
+      >
+      <ion-card-title *ngIf="!restTime" class="exercise-title">{{
+        routine.exercises[currentExerciseIndex].name
+      }}</ion-card-title>
+      <ion-img
+        *ngIf="!restTime"
+        [src]="routine.exercises[currentExerciseIndex].gif_url"
+        alt="{{ routine.exercises[currentExerciseIndex].name }}"
+        class="exercise-image"
+      ></ion-img>
+      <ion-img
+        *ngIf="restTime && !preparationTime"
+        src="assets/images/rest_time_2.jpg"
+        alt="Rest Time"
+        class="rest-image"
+      ></ion-img>
+      <ion-img
+        *ngIf="preparationTime"
+        src="assets/images/preparation_time.jpg"
+        alt="Rest Time"
+        class="rest-image"
+      ></ion-img>
       <ion-text>
         <p class="time-remaining">Time remaining: {{ currentTime }} seconds</p>
       </ion-text>
       <ion-list *ngIf="!restTime" class="exercise-info">
-
         <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Weight:</b></ion-label>
           <ion-text>Corporal Weight</ion-text>
@@ -20,38 +41,87 @@
 
         <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Repetitions:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.begginer[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.begginer[1] }}</ion-text>
+          <ion-text
+            >{{
+              routine.exercises[currentExerciseIndex].repetitions.begginer[0]
+            }}
+            -
+            {{
+              routine.exercises[currentExerciseIndex].repetitions.begginer[1]
+            }}</ion-text
+          >
         </ion-item>
-      
+
         <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Repetitions Beginner:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.begginer[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.begginer[1] }}</ion-text>
+          <ion-text
+            >{{
+              routine.exercises[currentExerciseIndex].repetitions.begginer[0]
+            }}
+            -
+            {{
+              routine.exercises[currentExerciseIndex].repetitions.begginer[1]
+            }}</ion-text
+          >
         </ion-item>
 
         <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Weight Beginner:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].weight.begginer[0] }} KG - {{ routine.exercises[currentExerciseIndex].weight.begginer[1] }} KG</ion-text>
+          <ion-text
+            >{{ routine.exercises[currentExerciseIndex].weight.begginer[0] }} KG
+            -
+            {{ routine.exercises[currentExerciseIndex].weight.begginer[1] }}
+            KG</ion-text
+          >
         </ion-item>
 
         <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Repetitions Intermediate:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.intermediate[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.intermediate[1] }}</ion-text>
+          <ion-text
+            >{{
+              routine.exercises[currentExerciseIndex].repetitions
+                .intermediate[0]
+            }}
+            -
+            {{
+              routine.exercises[currentExerciseIndex].repetitions
+                .intermediate[1]
+            }}</ion-text
+          >
         </ion-item>
 
         <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Weight Intermediate:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].weight.intermediate[0] }} KG - {{ routine.exercises[currentExerciseIndex].weight.intermediate[1] }} KG</ion-text>
+          <ion-text
+            >{{
+              routine.exercises[currentExerciseIndex].weight.intermediate[0]
+            }}
+            KG -
+            {{ routine.exercises[currentExerciseIndex].weight.intermediate[1] }}
+            KG</ion-text
+          >
         </ion-item>
-      
+
         <ion-item *ngIf="!routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Repetitions Advanced:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].repetitions.advanced[0] }} - {{ routine.exercises[currentExerciseIndex].repetitions.advanced[1] }}</ion-text>
+          <ion-text
+            >{{
+              routine.exercises[currentExerciseIndex].repetitions.advanced[0]
+            }}
+            -
+            {{
+              routine.exercises[currentExerciseIndex].repetitions.advanced[1]
+            }}</ion-text
+          >
         </ion-item>
         <ion-item *ngIf="routine.exercises[currentExerciseIndex].weight">
           <ion-label><b>Weight Advanced:</b></ion-label>
-          <ion-text>{{ routine.exercises[currentExerciseIndex].weight.advanced[0] }} KG - {{ routine.exercises[currentExerciseIndex].weight.advanced[1] }} KG </ion-text>
+          <ion-text
+            >{{ routine.exercises[currentExerciseIndex].weight.advanced[0] }} KG
+            -
+            {{ routine.exercises[currentExerciseIndex].weight.advanced[1] }} KG
+          </ion-text>
         </ion-item>
-
       </ion-list>
       <ion-card class="next-exercise-card" *ngIf="nextExercise && restTime">
         <ion-card-content>
@@ -60,12 +130,36 @@
       </ion-card>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="rutineEnded" class="congratulations-card">
+  <ion-card *ngIf="routineEnded" class="congratulations-card">
     <ion-card-content>
-      <ion-card-title class="congratulations-title">Congratulations!</ion-card-title>
+      <ion-card-title class="congratulations-title"
+        >Congratulations!</ion-card-title
+      >
       <ion-text class="congratulations-message">
         <p>You've successfully completed the routine.</p>
       </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item-divider />
+
+  <ion-card *ngIf="routineEnded" class="div-notes">
+    <ion-card-header>
+      <ion-card-title class="notes-title">Notes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="notes-description">
+        Please take a moment to write a note about this routine.
+      </p>
+      <p class="notes-description">
+        You can mention your achievements, like 'I bench pressed 100kg today.'
+      </p>
+      <ion-textarea
+        label="Routine note"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Enter your note here"
+      ></ion-textarea>
     </ion-card-content>
   </ion-card>
 </ion-content>

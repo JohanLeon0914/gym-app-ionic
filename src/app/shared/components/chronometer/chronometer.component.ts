@@ -23,7 +23,7 @@ export class ChronometerComponent implements OnInit {
   timer: any;
   currentTime: number = 0;
   restTime: boolean = true;
-  rutineEnded: boolean = false;
+  routineEnded: boolean = true;
   currentExercise: Exercise;
   setsCount: number = 0;
   nextExercise: Exercise | null = null;
@@ -66,7 +66,7 @@ export class ChronometerComponent implements OnInit {
           this.restTime = !this.restTime;
           this.startNextExercise();
         } else {
-          this.rutineEnded = true;
+          this.routineEnded = true;
         }
       }
       if (this.currentTime === 4 && this.utilSvc.getIsRoutineModalOpen()) {
@@ -85,7 +85,7 @@ export class ChronometerComponent implements OnInit {
           this.restTime = !this.restTime;
           this.startNextExercise();
         } else {
-          this.rutineEnded = true;
+          this.routineEnded = true;
         }
       }
       if (this.currentTime === 4 && this.utilSvc.getIsRoutineModalOpen()) {
@@ -112,7 +112,7 @@ export class ChronometerComponent implements OnInit {
           this.restTime = !this.restTime;
           this.startNextExercise();
         } else {
-          this.rutineEnded = true;
+          this.routineEnded = true;
           if(this.utilSvc.getIsRoutineModalOpen()) {
             this.saveDateCompleted()
           }
