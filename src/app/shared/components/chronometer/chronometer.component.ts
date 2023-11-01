@@ -28,6 +28,7 @@ export class ChronometerComponent implements OnInit {
   setsCount: number = 0;
   nextExercise: Exercise | null = null;
   preparationTime: boolean = true;
+  routineNote:string = "";
 
   constructor(private utilSvc: UtilService, private firebaseSvc: FirebaseService) { }
 
@@ -175,7 +176,30 @@ export class ChronometerComponent implements OnInit {
   }
 
   saveNoteRoutine() {
-
+    const user: User = this.utilSvc.getElementFromLocalStorage('user');
+    this.routine.note = this.routineNote;
+    let path = `users/${user.uid}/routines/${this.routine.id}`;
+    this.utilSvc.presentLoading();
+    this.firebaseSvc.updateDocument(path, this.routine).then(res => {
+      this.utilSvc.setElementInLocalStorage("routine", this.routine)
+      this.utilSvc.presentToast({
+        message: 'Note added to your routine',
+        color: 'success',
+        icon: 'checkmark-circle-outline',
+        duration: 1000,
+      });
+      this.utilSvc.dismissLoading();
+    }, error => {
+      this.utilSvc.dismissModal({ success: true });
+      this.utilSvc.presentToast({
+        message: error,
+        color: 'warning',
+        icon: 'alert-circle-outline',
+        duration: 5000
+      });
+      this.utilSvc.dismissLoading();
+    });
+    this.utilSvc.dismissLoading();
   }
 
 }

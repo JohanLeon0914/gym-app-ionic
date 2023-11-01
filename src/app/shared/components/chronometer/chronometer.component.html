@@ -156,9 +156,10 @@
       </p>
       <ion-textarea
         label="Routine note"
-        labelPlacement="floating"
-        fill="outline"
+        labelPlacement="floating" 
+        fill="solid"
         placeholder="Enter your note here"
+        [(ngModel)]="routineNote"
       ></ion-textarea>
       <ion-button
         class="center-button"
