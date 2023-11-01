@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
 import { Exercise } from 'src/models/Exercise.model';
-import { Routine } from 'src/models/Routine.model';
+import { History, Routine } from 'src/models/Routine.model';
 
 @Component({
   selector: 'app-view-routine-history',
@@ -11,7 +11,7 @@ import { Routine } from 'src/models/Routine.model';
 export class ViewRoutineHistoryComponent  implements OnInit {
 
   @Input() routine: Routine
-  @Input() history_exercises: Exercise[]
+  @Input() history: History
 
   constructor(private utilSvc: UtilService) { }
 

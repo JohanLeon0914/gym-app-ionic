@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Timestamp } from 'firebase/firestore';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilService } from 'src/app/services/util.service';
-import { Routine } from 'src/models/Routine.model';
+import { History, Routine } from 'src/models/Routine.model';
 import { ViewRoutineHistoryComponent } from '../view-routine-history/view-routine-history.component';
 import { Exercise } from 'src/models/Exercise.model';
 
@@ -30,11 +30,11 @@ export class ViewRoutineDetailComponent  implements OnInit {
     return null;
   }
 
-  viewHistoryOfRoutine(history_exercises:Exercise[]) {
+  viewHistoryOfRoutine(history:History) {
     const routine = this.routine
       this.utilSvc.presentModal({
         component: ViewRoutineHistoryComponent,
-        componentProps: { routine, history_exercises },
+        componentProps: { routine, history },
         cssClass: 'add-update-modal',
       });
   }

@@ -12,18 +12,18 @@
     <h2 class="custom-h2">{{ routine.name }}</h2>
   </ion-text>
 
-  <ion-card *ngIf="routine.note">
+  <ion-card *ngIf="history.note">
     <ion-card-header>
       <ion-card-title class="notes-title">Routine Note</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p class="notes-description">
-        {{ routine.note }}
+        {{ history.note }}
       </p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let exercise of history_exercises">
+  <ion-card *ngFor="let exercise of history.history_exercises">
     <ion-card-header>
       <ion-card-title class="notes-title">{{ exercise.name }} </ion-card-title>
     </ion-card-header>

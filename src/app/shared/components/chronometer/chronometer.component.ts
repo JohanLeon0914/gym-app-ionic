@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Exercise } from 'src/models/Exercise.model';
 import { UtilService } from 'src/app/services/util.service';
-import { history, Routine } from 'src/models/Routine.model';
+import { History, Routine } from 'src/models/Routine.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { User } from 'firebase/auth';
 
@@ -28,7 +28,7 @@ export class ChronometerComponent implements OnInit {
   setsCount: number = 0;
   nextExercise: Exercise | null = null;
   preparationTime: boolean = true;
-  routineNote:string = "";
+  routineNote: string = "";
 
   constructor(private utilSvc: UtilService, private firebaseSvc: FirebaseService) { }
 
@@ -114,7 +114,7 @@ export class ChronometerComponent implements OnInit {
           this.startNextExercise();
         } else {
           this.routineEnded = true;
-          if(this.utilSvc.getIsRoutineModalOpen()) {
+          if (this.utilSvc.getIsRoutineModalOpen()) {
             this.saveDateCompleted()
           }
         }
@@ -128,15 +128,16 @@ export class ChronometerComponent implements OnInit {
   saveDateCompleted() {
     const user: User = this.utilSvc.getElementFromLocalStorage('user');
     const date_completed = new Date()
-    const history:history = {
+    const history: History = {
       "completed_date": date_completed,
       "rest_time": this.restTimeNumber,
       "history_exercises": this.routine.exercises
     }
-    this.routine.history.push(history) 
+    this.routine.history.push(history)
     this.routine.rest_time = this.restTimeNumber
+    this.cleanExercisesNotes()
     this.utilSvc.setElementInLocalStorage("routine", this.routine);
-    if(user && this.routine.id) {
+    if (user && this.routine.id) {
       let path = `users/${user.uid}/routines/${this.routine.id}`;
       this.utilSvc.setElementInLocalStorage("routine", this.routine);
       this.firebaseSvc.updateDocument(path, this.routine).then(res => {
@@ -151,7 +152,13 @@ export class ChronometerComponent implements OnInit {
         });
         this.utilSvc.dismissLoading();
       });
-    } 
+    }
+  }
+
+  cleanExercisesNotes() {
+    for (const exercise of this.routine.exercises) {
+      exercise.note = ""; 
+    }
   }
 
   calculateNextExercise() {
@@ -190,8 +197,23 @@ export class ChronometerComponent implements OnInit {
         {
           text: 'Save',
           handler: (data) => {
-            this.routine.exercises[index].note = data[0]; 
-            this.updateRoutine("Note added to your exercise: " + exercise.name)
+            const historyExercise = this.routine.history[this.routine.history.length - 1].history_exercises.find((ex) => ex.id === exercise.id);
+
+            if (historyExercise) {
+              // Modifica la propiedad de nota del ejercicio encontrado
+              historyExercise.note = data[0];
+
+              // Encuentra el índice del ejercicio en el array history_exercises
+              const exerciseIndex = this.routine.history[this.routine.history.length - 1].history_exercises.findIndex((ex) => ex.id === exercise.id);
+
+              if (exerciseIndex !== -1) {
+                // Actualiza el ejercicio en el array history_exercises
+                this.routine.history[this.routine.history.length - 1].history_exercises[exerciseIndex] = historyExercise;
+
+                // Llama a la función para actualizar la rutina
+                this.updateRoutine("Note added to your exercise: " + exercise.name);
+              }
+            }
           },
         },
       ],
@@ -199,7 +221,7 @@ export class ChronometerComponent implements OnInit {
   }
 
   saveNoteRoutine() {
-    this.routine.note = this.routineNote;
+    this.routine.history[this.routine.history.length - 1].note = this.routineNote;
     this.routineNote = "";
     this.updateRoutine("Note added to your routine");
   }
@@ -217,7 +239,7 @@ export class ChronometerComponent implements OnInit {
           icon: 'checkmark-circle-outline',
           duration: 1000,
         });
-        this.utilSvc.dismissLoading(); 
+        this.utilSvc.dismissLoading();
       },
       error => {
         this.utilSvc.dismissModal({ success: true });
