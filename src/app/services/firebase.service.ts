@@ -7,6 +7,9 @@ import {
   updateProfile,
   signInWithPopup,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  UserCredential,
 } from 'firebase/auth';
 import { Observable, map } from 'rxjs';
 
@@ -14,20 +17,25 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class FirebaseService {
-  
+
   constructor(
     private db: AngularFirestore,
     private auth: AngularFireAuth,
     private utilSvc: UtilService
-  ) {}
+  ) { }
 
   //autenticacion
 
-  login() {
-    const provider = new GoogleAuthProvider();
+  loginWithEmailAndPassword(email: string, password: string): Promise<UserCredential> {
     const auth = getAuth();
 
-    return signInWithPopup(auth, provider);
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  registerWithEmailAndPassword(email: string, password: string): Promise<UserCredential> {
+    const auth = getAuth();
+
+    return createUserWithEmailAndPassword(auth, email, password);
   }
 
   updateUser(user: any) {
