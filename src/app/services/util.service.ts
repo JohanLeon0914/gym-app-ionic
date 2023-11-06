@@ -129,4 +129,8 @@ export class UtilService {
     this.isRutineModalOpen = isRoutineModalOpen
   }
 
+  get windowRef() { 
+    return window 
+  }
+
 }

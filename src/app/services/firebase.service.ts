@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UtilService } from './util.service';
+
 import {
   getAuth,
   updateProfile,
-  signInWithPopup,
-  GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   UserCredential,
@@ -18,10 +17,14 @@ import { Observable, map } from 'rxjs';
 })
 export class FirebaseService {
 
+  countryCode: string = '+1'; // Código de país por defecto
+  phoneNumber: string = '';
+
   constructor(
     private db: AngularFirestore,
     private auth: AngularFireAuth,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private afAuth: AngularFireAuth
   ) { }
 
   //autenticacion

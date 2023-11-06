@@ -1,10 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'firebase/auth';
+import { Auth, RecaptchaVerifier, SAMLAuthProvider, User, sendEmailVerification } from 'firebase/auth';
 import { FirebaseService } from '../../../services/firebase.service';
 import { UtilService } from '../../../services/util.service';
 import { GetRoutinesComponent } from 'src/app/shared/components/get-routines/get-routines.component';
 import { Routine } from 'src/models/Routine.model';
 import { NgForm } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { IfStmt } from '@angular/compiler';
+export class PhoneNumber {
+  country: string;
+  area: string;
+  prefix: string;
+  line: string;
+  // format phone numbers as E. 164 
+  get e164() {
+    const num = this.country + this.area + this.prefix + this.line
+    return `+${num}`
+  }
+}
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +35,10 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() { }
 
+  private afAuth: AngularFireAuth
+  phoneNumber: string;
+  auth: Auth
+
   ionViewWillEnter() {
     this.getUser();
   }
@@ -35,15 +52,26 @@ export class ProfilePage implements OnInit {
       const { email, password } = loginForm.value;
       this.firebaseSvc.loginWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          this.user = userCredential.user;
-          this.utilSvc.setElementInLocalStorage("user", this.user)
-          this.utilSvc.presentToast({
-            message: 'Welcome ' + this.user.email,
-            color: 'success',
-            position: 'top',
-            icon: 'checkmark-circle-outline',
-            duration: 2000,
-          });
+          if (userCredential.user.emailVerified) {
+            this.user = userCredential.user;
+            this.utilSvc.setElementInLocalStorage("user", this.user)
+            this.utilSvc.presentToast({
+              message: 'Welcome ' + this.user.email,
+              color: 'success',
+              position: 'top',
+              icon: 'checkmark-circle-outline',
+              duration: 2000,
+            });
+          } else {
+            this.utilSvc.presentToast({
+              message: userCredential.user.email + " is not verified.",        
+              color: 'danger',
+              position: 'top',
+              icon: 'checkmark-circle-outline',
+              duration: 2000,
+            });
+          }
+
         })
         .catch((error) => {
           this.manageErrorMessageLogin(error)
@@ -54,21 +82,23 @@ export class ProfilePage implements OnInit {
   onSignUp(registerForm: NgForm) {
     if (registerForm.valid) {
       const { email, password } = registerForm.value;
+      this.utilSvc.presentLoading()
       this.firebaseSvc.registerWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // userCredential.user contiene información sobre el usuario registrado
-          this.user = userCredential.user;
-          this.utilSvc.setElementInLocalStorage("user", this.user)
-          this.utilSvc.presentToast({
-            message: 'Welcome ' + this.user.email,
-            color: 'success',
-            position: 'top',
-            icon: 'checkmark-circle-outline',
-            duration: 2000,
-          });
+          sendEmailVerification(userCredential.user).then(() => {
+            this.utilSvc.presentToast({
+              message: 'We have sent a verification email to: ' + userCredential.user.email,
+              color: 'success',
+              position: 'top',
+              icon: 'checkmark-circle-outline',
+              duration: 5000,
+            });
+          })
+          this.utilSvc.dismissLoading()
         })
         .catch((error) => {
           this.manageErrorMessageSignUp(error)
+          this.utilSvc.dismissLoading()
         });
     }
   }
@@ -98,27 +128,27 @@ export class ProfilePage implements OnInit {
 
   manageErrorMessageSignUp(error) {
     let errorMessage: string;
-        switch (error.code) {
-          case 'auth/invalid-email':
-            errorMessage = 'Invalid email address.';
-            break;
-          case 'auth/email-already-in-use':
-            errorMessage = 'The email is already in use.';
-            break;
-          case 'auth/weak-password':
-            errorMessage = 'The password is too weak.';
-            break;
-          // Agrega más casos según sea necesario para manejar otros posibles errores.
-          default:
-            errorMessage = 'An error occurred during registration.';
-        }
-        this.utilSvc.presentToast({
-          message: errorMessage,
-          color: 'warning',
-          icon: 'alert-circle-outline',
-          duration: 5000,
-          position: "top"
-        });
+    switch (error.code) {
+      case 'auth/invalid-email':
+        errorMessage = 'Invalid email address.';
+        break;
+      case 'auth/email-already-in-use':
+        errorMessage = 'The email is already in use.';
+        break;
+      case 'auth/weak-password':
+        errorMessage = 'The password is too weak.';
+        break;
+      // Agrega más casos según sea necesario para manejar otros posibles errores.
+      default:
+        errorMessage = 'An error occurred during registration.';
+    }
+    this.utilSvc.presentToast({
+      message: errorMessage,
+      color: 'warning',
+      icon: 'alert-circle-outline',
+      duration: 5000,
+      position: "top"
+    });
   }
 
   signOut() {
