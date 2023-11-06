@@ -104,18 +104,19 @@ export class ProfilePage implements OnInit {
 
   manageErrorMessageLogin(error) {
     let errorMessage: string;
+    console.log(error.code)
     switch (error.code) {
-      case 'auth/invalid-email':
-        errorMessage = 'Invalid email address.';
-        break;
       case 'auth/user-not-found':
-      case 'auth/wrong-password':
+        errorMessage = 'No user found with this email address. Please register first.';
+        break;
+      case 'auth/invalid-login-credentials':
         errorMessage = 'Incorrect email or password.';
         break;
       // Agrega más casos según sea necesario para manejar otros posibles errores.
       default:
         errorMessage = 'An error occurred during login.';
     }
+  
     this.utilSvc.presentToast({
       message: errorMessage,
       color: 'warning',
