@@ -86,12 +86,22 @@ export class RoutinePage {
         this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
       }
     } else {
-      this.utilSvc.presentToast({
+      this.utilSvc.presentAlert({
+        header: 'Save your routines!',
         message: 'You need to log in to access and save routines.',
-        color: 'warning',
-        position: 'top',
-        icon: 'alert-circle-outline',
-        duration: 2500,
+        mode: 'ios',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Login',
+            handler: () => {
+              this.utilSvc.routerLink("tabs/profile")
+            },
+          },
+        ],
       });
     }
     
@@ -133,12 +143,22 @@ export class RoutinePage {
         this.getRoutine()
       }
     } else {
-      this.utilSvc.presentToast({
+      this.utilSvc.presentAlert({
+        header: 'Acces your routines!',
         message: 'You need to log in to access and save routines.',
-        color: 'warning',
-        position: 'top',
-        icon: 'alert-circle-outline',
-        duration: 2500,
+        mode: 'ios',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Login',
+            handler: () => {
+              this.utilSvc.routerLink("tabs/profile")
+            },
+          },
+        ],
       });
     } 
     
