@@ -88,7 +88,7 @@ export class RoutinePage {
     } else {
       this.utilSvc.presentAlert({
         header: 'Save your routines!',
-        message: 'You need to log in to access and save routines.',
+        message: 'You need to sign in to access and save routines.',
         mode: 'ios',
         buttons: [
           {
@@ -96,7 +96,7 @@ export class RoutinePage {
             role: 'cancel',
           },
           {
-            text: 'Login',
+            text: 'Sign in',
             handler: () => {
               this.utilSvc.routerLink("tabs/profile")
             },
@@ -145,7 +145,7 @@ export class RoutinePage {
     } else {
       this.utilSvc.presentAlert({
         header: 'Acces your routines!',
-        message: 'You need to log in to access and save routines.',
+        message: 'You need to sign in to access and save routines.',
         mode: 'ios',
         buttons: [
           {
@@ -153,7 +153,7 @@ export class RoutinePage {
             role: 'cancel',
           },
           {
-            text: 'Login',
+            text: 'Sign in',
             handler: () => {
               this.utilSvc.routerLink("tabs/profile")
             },
