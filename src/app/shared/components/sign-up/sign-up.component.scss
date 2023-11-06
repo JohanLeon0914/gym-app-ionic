@@ -1,0 +1,13 @@
+ion-text {
+    display: block; /* Establece como bloque para que puedas aplicar estilos */
+    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 24px; /* Tamaño de fuente */
+    font-weight: bold; /* Peso de fuente en negrita */
+    margin-bottom: 20px; /* Agrega un margen inferior para separar el texto de los elementos del formulario */
+    color: #007bff; /* Color del texto */
+    padding-top: 20px;
+  }
+
+  form {
+    padding: 12px;
+  }

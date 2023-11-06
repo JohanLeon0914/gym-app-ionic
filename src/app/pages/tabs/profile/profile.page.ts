@@ -4,8 +4,9 @@ import { FirebaseService } from '../../../services/firebase.service';
 import { UtilService } from '../../../services/util.service';
 import { GetRoutinesComponent } from 'src/app/shared/components/get-routines/get-routines.component';
 import { Routine } from 'src/models/Routine.model';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForgotPasswordComponent } from 'src/app/shared/components/forgot-password/forgot-password.component';
+import { SignUpComponent } from 'src/app/shared/components/sign-up/sign-up.component';
 
 @Component({
   selector: 'app-profile',
@@ -63,9 +64,9 @@ export class ProfilePage implements OnInit {
             this.utilSvc.dismissLoading()
             this.utilSvc.presentToast({
               message: userCredential.user.email + " is not verified.",        
-              color: 'danger',
+              color: 'warning',
               position: 'top',
-              icon: 'checkmark-circle-outline',
+              icon: 'alert-circle-outline',
               duration: 2000,
             });
           }
@@ -78,27 +79,12 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  onSignUp() {
-    if (this.form.valid) {
-      const { email, password } = this.form.value;
-      this.utilSvc.presentLoading()
-      this.firebaseSvc.registerWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          sendEmailVerification(userCredential.user).then(() => {
-            this.utilSvc.dismissLoading()
-            this.utilSvc.presentToast({
-              message: 'We have sent a verification email to: ' + userCredential.user.email,
-              color: 'success',
-              position: 'top',
-              icon: 'checkmark-circle-outline',
-              duration: 5000,
-            });
-          })
-        })
-        .catch((error) => {
-          this.manageErrorMessageSignUp(error)
-          this.utilSvc.dismissLoading()
-        });
+  async onSignUp() {
+    let res = await this.utilSvc.presentModal({
+      component: SignUpComponent,
+      cssClass: 'add-update-modal',
+    });
+    if (res && res.success) {
     }
   }
 
