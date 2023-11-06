@@ -77,13 +77,24 @@ export class RoutinePage {
   }
 
   async saveRoutine() {
-    let res = await this.utilSvc.presentModal({
-      component: SaveRoutineComponent,
-      cssClass: 'add-update-modal',
-    });
-    if (res && res.success) {
-      this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+    if(this.user) {
+      let res = await this.utilSvc.presentModal({
+        component: SaveRoutineComponent,
+        cssClass: 'add-update-modal',
+      });
+      if (res && res.success) {
+        this.routine = this.utilSvc.getElementFromLocalStorage("routine") as Routine
+      }
+    } else {
+      this.utilSvc.presentToast({
+        message: 'You need to log in to access and save routines.',
+        color: 'warning',
+        position: 'top',
+        icon: 'alert-circle-outline',
+        duration: 2500,
+      });
     }
+    
   }
 
   onRestTimeChange(event) {
@@ -113,13 +124,24 @@ export class RoutinePage {
   }
 
   async openModalGetRoutines() {
-    let res = await this.utilSvc.presentModal({
-      component: GetRoutinesComponent,
-      cssClass: 'add-update-modal',
-    });
-    if (res && res.success) {
-      this.getRoutine()
-    }
+    if(this.user) {
+      let res = await this.utilSvc.presentModal({
+        component: GetRoutinesComponent,
+        cssClass: 'add-update-modal',
+      });
+      if (res && res.success) {
+        this.getRoutine()
+      }
+    } else {
+      this.utilSvc.presentToast({
+        message: 'You need to log in to access and save routines.',
+        color: 'warning',
+        position: 'top',
+        icon: 'alert-circle-outline',
+        duration: 2500,
+      });
+    } 
+    
   }
 
 }

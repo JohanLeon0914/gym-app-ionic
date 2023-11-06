@@ -88,7 +88,7 @@
   </ion-row>
 
   <ion-row class="centered-button">
-    <ion-col *ngIf="routine.exercises.length && user">
+    <ion-col *ngIf="routine.exercises.length">
       <ion-button
         expand="full"
         shape="round"
@@ -112,7 +112,6 @@
     </ion-col>
     <ion-col>
       <ion-button
-        *ngIf="user"
         color="tertiary"
         expand="full"
         shape="round"
