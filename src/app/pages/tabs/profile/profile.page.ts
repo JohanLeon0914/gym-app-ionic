@@ -4,21 +4,8 @@ import { FirebaseService } from '../../../services/firebase.service';
 import { UtilService } from '../../../services/util.service';
 import { GetRoutinesComponent } from 'src/app/shared/components/get-routines/get-routines.component';
 import { Routine } from 'src/models/Routine.model';
-import { NgForm } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { IfStmt } from '@angular/compiler';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ForgotPasswordComponent } from 'src/app/shared/components/forgot-password/forgot-password.component';
-export class PhoneNumber {
-  country: string;
-  area: string;
-  prefix: string;
-  line: string;
-  // format phone numbers as E. 164 
-  get e164() {
-    const num = this.country + this.area + this.prefix + this.line
-    return `+${num}`
-  }
-}
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +15,12 @@ export class PhoneNumber {
 export class ProfilePage implements OnInit {
 
   user = {} as User;
+  hide: boolean = true;
+  type: string;
+  form = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  })
 
   constructor(
     private firebaseSvc: FirebaseService,
@@ -36,7 +29,6 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() { }
 
-  private afAuth: AngularFireAuth
   phoneNumber: string;
   auth: Auth
 
@@ -48,12 +40,15 @@ export class ProfilePage implements OnInit {
     return (this.user = this.utilSvc.getElementFromLocalStorage('user'));
   }
 
-  onSubmit(loginForm: NgForm) {
-    if (loginForm.valid) {
-      const { email, password } = loginForm.value;
+  onSubmit() {
+    if (this.form.valid) {
+      const { email, password } = this.form.value;
+      this.utilSvc.presentLoading()
       this.firebaseSvc.loginWithEmailAndPassword(email, password)
         .then((userCredential) => {
+          this.utilSvc.dismissLoading()
           if (userCredential.user.emailVerified) {
+            this.form.reset()
             this.user = userCredential.user;
             this.utilSvc.setElementInLocalStorage("user", this.user)
             this.utilSvc.presentToast({
@@ -63,7 +58,9 @@ export class ProfilePage implements OnInit {
               icon: 'checkmark-circle-outline',
               duration: 2000,
             });
+            this.utilSvc.dismissLoading()
           } else {
+            this.utilSvc.dismissLoading()
             this.utilSvc.presentToast({
               message: userCredential.user.email + " is not verified.",        
               color: 'danger',
@@ -76,17 +73,19 @@ export class ProfilePage implements OnInit {
         })
         .catch((error) => {
           this.manageErrorMessageLogin(error)
+          this.utilSvc.dismissLoading()
         });
     }
   }
 
-  onSignUp(registerForm: NgForm) {
-    if (registerForm.valid) {
-      const { email, password } = registerForm.value;
+  onSignUp() {
+    if (this.form.valid) {
+      const { email, password } = this.form.value;
       this.utilSvc.presentLoading()
       this.firebaseSvc.registerWithEmailAndPassword(email, password)
         .then((userCredential) => {
           sendEmailVerification(userCredential.user).then(() => {
+            this.utilSvc.dismissLoading()
             this.utilSvc.presentToast({
               message: 'We have sent a verification email to: ' + userCredential.user.email,
               color: 'success',
@@ -95,7 +94,6 @@ export class ProfilePage implements OnInit {
               duration: 5000,
             });
           })
-          this.utilSvc.dismissLoading()
         })
         .catch((error) => {
           this.manageErrorMessageSignUp(error)
@@ -192,5 +190,13 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  showOrHidePassword() {
+    this.hide = !this.hide;
+    if(this.hide) {
+      this.type = 'password'
+    } else {
+      this.type = 'text'
+    }
+  }
 
 }

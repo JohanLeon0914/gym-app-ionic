@@ -17,35 +17,42 @@
     <h2>{{ user?.displayName }}</h2>
     <div>{{ user?.email }}</div>
 
-    <form *ngIf="!user" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <form *ngIf="!user" #loginForm="ngForm" (ngSubmit)="onSubmit()" class="ion-text-center">
 
-      <ion-text>
-        Login or Register
-      </ion-text>
-    
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" name="email" ngModel required></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" name="password" ngModel required></ion-input>
-      </ion-item>
-    
-      <ion-button expand="full" shape="round" color="success" type="submit">
-        Sign In
-      </ion-button>
-    
-      <ion-button expand="full" shape="round" color="tertiary" (click)="onSignUp(loginForm)">
-        Sign Up
-      </ion-button>
-
-      <ion-text class="forgotPassword" (click)="forgotPassword()">
-        <a>Forgot your password?</a>
-      </ion-text>
-    
-    </form>
+        <ion-text>
+          Login or Register
+        </ion-text>
+      
+        <app-custom-input 
+            autocomplete="email"
+            [control]="form.controls.email"
+            name="email"
+            type="email"
+            label="Email"
+            icon="mail-outline"
+          ></app-custom-input>
+      
+        <app-custom-input
+            [control]="form.controls.password"
+            name="password"
+            type="password"
+            label="Password"
+            icon="lock-closed-outline"
+          ></app-custom-input>
+      
+        <ion-button expand="full" shape="round" color="success" type="submit">
+          Sign In
+        </ion-button>
+      
+        <ion-button expand="full" shape="round" color="tertiary" (click)="onSignUp()">
+          Sign Up
+        </ion-button>
+  
+        <ion-text class="forgotPassword" (click)="forgotPassword()">
+          <a>Forgot your password?</a>
+        </ion-text>
+      
+      </form>
 
     <ion-button
       *ngIf="user"
