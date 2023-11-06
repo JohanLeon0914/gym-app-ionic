@@ -7,6 +7,7 @@ import { Routine } from 'src/models/Routine.model';
 import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IfStmt } from '@angular/compiler';
+import { ForgotPasswordComponent } from 'src/app/shared/components/forgot-password/forgot-password.component';
 export class PhoneNumber {
   country: string;
   area: string;
@@ -176,6 +177,15 @@ export class ProfilePage implements OnInit {
   async openModalGetRoutines() {
     let res = await this.utilSvc.presentModal({
       component: GetRoutinesComponent,
+      cssClass: 'add-update-modal',
+    });
+    if (res && res.success) {
+    }
+  }
+
+  async forgotPassword(){
+    let res = await this.utilSvc.presentModal({
+      component: ForgotPasswordComponent,
       cssClass: 'add-update-modal',
     });
     if (res && res.success) {
