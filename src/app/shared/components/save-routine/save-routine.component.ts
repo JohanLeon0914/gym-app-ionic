@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -12,12 +12,11 @@ import { Routine } from 'src/models/Routine.model';
 export class SaveRoutineComponent implements OnInit {
 
   user = {} as User;
-  routine: Routine = new Routine()
+  @Input() routine: Routine 
 
   constructor(private utilSvc: UtilService, private firebaseSvc: FirebaseService) { }
 
   ngOnInit() {
-    this.getRoutine()
   }
 
   ionViewWillEnter() {
@@ -26,10 +25,6 @@ export class SaveRoutineComponent implements OnInit {
 
   getUser() {
     return (this.user = this.utilSvc.getElementFromLocalStorage('user'));
-  }
-
-  getRoutine() {
-    this.routine = this.utilSvc.getRoutine();
   }
 
   onRoutineNameChange(event) {
