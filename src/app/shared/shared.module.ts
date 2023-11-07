@@ -14,6 +14,7 @@ import { ViewRoutineHistoryComponent } from './components/view-routine-history/v
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { EditRoutineExerciseComponent } from './components/edit-routine-exercise/edit-routine-exercise.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ForgotPasswordComponent,
     CustomInputComponent,
     SignUpComponent,
+    EditRoutineExerciseComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ForgotPasswordComponent,
     CustomInputComponent,
     SignUpComponent,
+    EditRoutineExerciseComponent,
   ]
 })
 export class SharedModule { }

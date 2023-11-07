@@ -6,6 +6,7 @@ import { Routine } from 'src/models/Routine.model';
 import { SaveRoutineComponent } from 'src/app/shared/components/save-routine/save-routine.component';
 import { GetRoutinesComponent } from 'src/app/shared/components/get-routines/get-routines.component';
 import { User } from 'firebase/auth';
+import { EditRoutineExerciseComponent } from 'src/app/shared/components/edit-routine-exercise/edit-routine-exercise.component';
 
 @Component({
   selector: 'app-routine',
@@ -162,6 +163,17 @@ export class RoutinePage {
       });
     } 
     
+  }
+
+  async openModalEditRoutineExercise(exercise:Exercise) {
+    let res = await this.utilSvc.presentModal({
+      component: EditRoutineExerciseComponent,
+      componentProps: { exercise },
+      cssClass: 'add-update-modal',
+    });
+    if (res && res.success) {
+      this.getRoutine()
+    }
   }
 
 }

@@ -1,7 +1,17 @@
 <!-- Input regular -->
 <ion-item *ngIf="type !== 'textarea'" class="ion-margin-vertical">
   <ion-icon color="primary" *ngIf="icon" slot="start" [name]="icon"></ion-icon>
-  <ion-input [label]="label" label-placement="floating" [class.text-button]="!isPassword" debounce="500" [autocomplete]="autocomplete" [type]="type" [formControl]="control"></ion-input>
+  <ion-input
+    [value]="value"
+    [label]="label"
+    label-placement="floating"
+    [class.text-button]="!isPassword"
+    debounce="500"
+    [autocomplete]="autocomplete"
+    [type]="type"
+    [formControl]="control"
+  >
+</ion-input>
   <ion-buttons *ngIf="isPassword" slot="end">
     <ion-button (click)="showOrHidePassword()">
       <ion-icon [name]="hide ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
@@ -9,8 +19,13 @@
   </ion-buttons>
 </ion-item>
 <!-- Textarea -->
-<ion-item *ngIf="type === 'textarea'" class="ion-margin-vertical"> 
-  <ion-label>Awesome Label</ion-label>
-  <ion-label position="floating">{{ label }}</ion-label>
-  <ion-textarea auto-grow="true" [formControl]="control" debounce="500"></ion-textarea>
+<ion-item *ngIf="type === 'textarea'" class="ion-margin-vertical">
+  <ion-icon color="primary" *ngIf="icon" slot="start" [name]="icon"></ion-icon>
+  <ion-textarea
+    label-placement="floating"
+    [label]="label"
+    auto-grow="true"
+    [formControl]="control"
+    debounce="500"
+  ></ion-textarea>
 </ion-item>

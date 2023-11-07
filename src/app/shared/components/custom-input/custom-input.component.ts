@@ -13,6 +13,7 @@ export class CustomInputComponent  implements OnInit {
   @Input() icon: string;
   @Input() type: string;
   @Input() autocomplete: string;
+  @Input() value: string | number;
 
   isPassword: boolean;
   hide: boolean = true;

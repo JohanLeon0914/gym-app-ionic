@@ -46,30 +46,51 @@
         alt="Imagen del ejercicio"
         class="exercise-image"
       />
+
       <div class="exercise-details">
+
         <ion-card-title>{{ exercise.name }}</ion-card-title>
         <p class="exercise-description">{{ exercise.description }}</p>
         <p>Sets: {{ exercise.sets }}</p>
         
-        <ion-button
-          size="small"
-          shape="round"
-          color="success"
-          (click)="addExerciseToRoutine(exercise)"
-        >
-          <ion-icon name="add-outline"></ion-icon>
-        </ion-button>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button
+              size="small"
+              shape="round"
+              color="success"
+              (click)="addExerciseToRoutine(exercise)"
+            >
+              <ion-icon name="add-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button
+              shape="round"
+              size="small"
+              color="success"
+              (click)="substractExerciseToRoutine(exercise)"
+            >
+              <ion-icon name="remove-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
 
-        <ion-button
-          shape="round"
-          size="small"
-          color="success"
-          (click)="substractExerciseToRoutine(exercise)"
-        >
-          <ion-icon name="remove-outline"></ion-icon>
-        </ion-button>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button
+              size="small"
+              shape="round"
+              color="tertiary"
+              (click)="openModalEditRoutineExercise(exercise)"
+              >
+              <ion-icon name="open-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
 
       </div>
+
     </ion-card-content>
   </ion-card>
 

@@ -1,0 +1,55 @@
+<ion-content>
+  <app-header
+    color="dark"
+    [centerTitle]="true"
+    [isModal]="true"
+    [title]="exercise.name"
+  ></app-header>
+  <ion-card>
+    <ion-card-content>
+      <div class="exercise-image-container">
+        <img
+          [src]="exercise.gif_url"
+          alt="Imagen del ejercicio"
+          class="exercise-image"
+        />
+      </div>
+
+      <ion-card-title>Edit {{ exercise.name }}</ion-card-title>
+
+      <form
+        #loginForm="ngForm"
+        (ngSubmit)="onEditRoutineExercise()"
+        class="ion-text-center"
+      >
+      <app-custom-input 
+        [control]="form.controls.name"
+        name="name"
+        type="text"
+        label="Name"
+        icon="barbell-outline"
+      ></app-custom-input>
+
+      <app-custom-input 
+        [control]="form.controls.description"
+        name="description"
+        type="textarea"
+        label="Description"
+        icon="folder-outline"
+      ></app-custom-input>
+
+      <app-custom-input 
+        [control]="form.controls.run_time"
+        name="run_time"
+        type="number"
+        label="Exercise time (Seconds)"
+        icon="time-outline"
+      ></app-custom-input>
+
+        <ion-button expand="full" shape="round" color="success" type="submit">
+          Save
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
