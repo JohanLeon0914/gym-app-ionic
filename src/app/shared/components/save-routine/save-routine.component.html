@@ -3,24 +3,29 @@
     color="dark"
     [centerTitle]="true"
     [isModal]="true"
-    title="Save Routine"    
+    title="Save Routine"
   ></app-header>
 
   <ion-item>
-    <ion-input 
-      label="Routine name:"
-      placeholder="Enter routine name" 
-      (ionChange)="onRoutineNameChange($event)" 
+    <ion-input
+      label="Routing name"
+      label-placement="floating"
+      fill="solid"
+      placeholder="Enter routing name"
       [value]="routine.name"
-      minlength="3" 
-      maxlength="50" 
-      >
-    </ion-input>
+      (ionChange)="onRoutineNameChange($event)" 
+      minlength="3"
+      maxlength="50"
+    ></ion-input>
   </ion-item>
-  
+
   <ion-card *ngFor="let exercise of routine.exercises">
     <ion-card-content class="card-content">
-      <img [src]="exercise.image_url" alt="Imagen del ejercicio" class="exercise-image">
+      <img
+        [src]="exercise.image_url"
+        alt="Imagen del ejercicio"
+        class="exercise-image"
+      />
       <div class="exercise-details">
         <ion-card-title>{{ exercise.name }}</ion-card-title>
         <p class="exercise-description">{{ exercise.description }}</p>
@@ -35,5 +40,4 @@
       <ion-icon slot="end" name="bookmark-outline"></ion-icon>
     </ion-button>
   </div>
-
 </ion-content>
